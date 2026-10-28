@@ -108,7 +108,9 @@ training. M is not a probability and has no stored threshold. Any cell count can
 **Reference points** until the full held-out evaluation gives recall-based ones:
 
 - M > 0 rejects a frame with any blur cell, the strictest choice;
-- 0.05 and 0.25 are the operating points of the two-video experiment.
+- 0.05 and 0.25 are the operating points of the two-video experiment. That experiment counted every cell, the ring
+  included, so with the built-in M the same values are starting points, not the same decisions. A threshold belongs to
+  the readout it was set on.
 
 ```
 pip install -r requirements.txt
@@ -118,7 +120,8 @@ python classify.py --weights weights/v9_base_selfmap_v2_ep019.pt --input frames 
 
 `classify.py` calls a frame blurred when M > `--mass`. It reports whether the weight file is a published release
 asset (by its sha256) and writes `results.csv` as it goes. `--resume` continues an interrupted run (also after
-`--move`), and `--dry-run` only scores, into `results_dry_run.csv`. With Update 1's
+`--move`), but only with the settings recorded in `run.json`: the weight file, the threshold, the input folder, copy or
+move. `--dry-run` only scores, into `results_dry_run.csv`, and never copies or moves. With Update 1's
 `round3_base_p99_ep029.pt` it uses that file's stored thresholds (`--recall 90 / 95 / 98`), as before.
 
 Tests (no private data needed; the weight-file tests run when the files are in `weights/`):
@@ -218,7 +221,8 @@ Update 1 (`round3`) and Update 2 (`v9`) scored every frame of two H.264 videos t
 
 The [report](experiments/r4k1_codec_frametype/REPORT.md) has nine analyses, the verdicts on seven hypotheses and the
 limitations, plus 12 tables and 6 figures. The code, the per-frame data and a manifest of SHA-256 hashes are in the
-folder. From the per-frame data the code reproduces every result file, table and figure byte for byte.
+folder. From the per-frame data the code reproduces every result file, table and figure byte for byte. Its packages
+are pinned in [requirements-experiments.txt](requirements-experiments.txt).
 
 - **Inside a shot, both models score the I-frame sharper than its P/B neighbours,** although the neighbours show the
   same picture.
@@ -255,6 +259,11 @@ model saw a sharp inter-coded frame with a known label.
   on frames it is not validated.
 - **The coded frame type changes the scores** (two-video experiment): I-frames score sharper than their P/B
   neighbours. On low-bitrate encodes, comparisons and selections across frame types are biased.
+  - The experiment is observational: the encoders chose the frame types. An I-frame differs from its neighbours in
+    frame type, quantiser and bits at once.
+  - On video B the fixed GOP places the I-frames independently of the content, but nothing here separates the frame
+    type from its quantiser. A controlled re-encode would: the same source frames under different GOP structures and
+    quantisers.
 - **Area weighting.** A small, strongly blurred region adds little mass. This tolerates background defocus better
   than Update 1, but it also tolerates a small blurred subject, such as a fast-moving hand.
 - **The outer cell ring was not taught.** The built-in M leaves it out; a readout that counts it adds untaught

@@ -29,13 +29,13 @@
   "phase2_tiefree.py": "ec1405913eb0c6d7a47be4bc9f742c3f836be9eb2018e87dc3e67b8de29824d6",
   "PROTOCOL.md": "6a8c10acc76219cf400db3bf95141b7e1d296746ce53540a0c18e5575b5d437e",
   "PROTOCOL.sha256": "237ae6bee127f0c48f59e0bacc1fb7cc060800a0afac6c774cd1473ed36ee18f",
-  "REPORT.md": "4890b1dcee134761a51c5885892c71d04d4cfab7a1baca37eb3ce6c9e1408b11",
+  "REPORT.md": "8be7d8afb355653ad646862a679153c3edcf581eb6a08a68bd5b4ba066c96135",
   "report_tables.py": "998c42cd955a6d3472b04fd412ecc1c640b9f57f649b634ef9d7e4e71539c4e4",
   "tables.md": "db43f18dd3032b453fada3caf9a46902d8c4a5979cc6a5859229ac7cfd1b5f52"
  },
  "publication_edits": {
   "extract.py": "Frame Blur Studio's valid_cells copied in, so the script needs no unpublished module (the same function, checked on 12 grid shapes); the unused sys import removed",
-  "REPORT.md": "section 2: the v9 readout counts the outer cell ring (the published loader's built-in M does not), Frame Blur Studio is the author's unpublished desktop application; section 9: what reruns without the videos",
+  "REPORT.md": "section 2: the v9 readout counts the outer cell ring (the published loader's built-in M does not), Frame Blur Studio is the author's unpublished desktop application; section 7: the observational limitation (frame type, quantiser and bits change together); section 9: what reruns without the videos, the pinned packages (requirements-experiments.txt; Pillow was listed but is not used)",
   "phase2_tiefree.py": "added: the exploratory script behind data/exploratory_phase2_tiefree.json, as it was run",
   "check": "from data/frames_*.csv.gz and data/cells_*.npz, analyse.py, phase2_tiefree.py, figures.py and report_tables.py reproduce every results_*.json, the exploratory file, tables.md and the six figures byte for byte",
   "line_ends": "the hashes are of the files with LF line ends, as stored in git; a Windows checkout with core.autocrlf has CRLF in text files, so compare after normalising line ends (tests/test_reproduction.py does)"

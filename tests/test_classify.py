@@ -91,14 +91,27 @@ def test_interrupted_move_run_resumes_without_losses_or_duplicates(setup):
     assert sorted(p.name for p in (setup["out"] / "sharp").iterdir()) == ["f0.png", "f2.png", "f4.png"]
 
 
+def test_dry_run_with_resume_leaves_the_output_folders_alone(setup):
+    """An image in <output>/sharp without a row (left by a real run) is neither moved nor scored by a dry run."""
+    setup["state"].update(model=FakeMass(), meta=MASS_META)
+    for label in ("sharp", "blur"):
+        (setup["out"] / label).mkdir(parents=True)
+    orphan = setup["out"] / "sharp" / "orphan.png"
+    Image.fromarray(np.full((16, 16, 3), 200, np.uint8)).save(orphan)      # M = 1: blurred
+    classify.main(setup["args"] + ["--mass", "0.05", "--dry-run", "--resume"])
+    assert orphan.exists() and not list((setup["out"] / "blur").iterdir())
+    assert set(rows(setup["out"], "results_dry_run.csv")) == {f"f{i}.png" for i in range(6)}
+
+
 def test_mass_model_needs_a_mass_threshold_and_refuses_recall(setup):
     setup["state"].update(model=FakeMass(), meta=MASS_META)
     with pytest.raises(SystemExit, match="--mass"):
         classify.main(setup["args"])
     with pytest.raises(SystemExit, match="no recall thresholds"):
         classify.main(setup["args"] + ["--recall", "95"])
-    with pytest.raises(SystemExit, match="--mass"):
-        classify.main(setup["args"] + ["--mass", "-1"])
+    for value in ("-1", "nan", "inf"):                           # nan and inf would call every image sharp
+        with pytest.raises(SystemExit, match="finite"):
+            classify.main(setup["args"] + ["--mass", value])
 
 
 def test_lse_model_refuses_a_mass_threshold(setup):
@@ -123,5 +136,31 @@ def test_mass_decision_is_m_above_the_threshold(setup, threshold, blurred):
 def test_resume_refuses_a_results_file_of_the_other_kind(setup):
     classify.main(setup["args"] + ["--dry-run"])                 # blur_score rows
     setup["state"].update(model=FakeMass(), meta=MASS_META)
-    with pytest.raises(SystemExit, match="another kind of weight file"):
+    with pytest.raises(SystemExit, match="score"):
         classify.main(setup["args"] + ["--mass", "0", "--dry-run", "--resume"])
+
+
+def test_resume_refuses_another_threshold_weight_file_input_or_mode(setup, tmp_path):
+    """One results.csv holds one decision rule: a resume with other settings would mix two."""
+    setup["state"].update(model=FakeMass(), meta=MASS_META)
+    classify.main(setup["args"] + ["--mass", "0.05"])
+    other_weights = tmp_path / "w2.pt"
+    other_weights.write_bytes(b"another stand-in")
+    other_input = tmp_path / "frames2"
+    other_input.mkdir()
+    for key, args in [("threshold", setup["args"] + ["--mass", "0.25"]),
+                      ("weights_sha256", setup["args"][:1] + [str(other_weights)] + setup["args"][2:] + ["--mass", "0.05"]),
+                      ("input", setup["args"][:3] + [str(other_input)] + setup["args"][4:] + ["--mass", "0.05"]),
+                      ("move", setup["args"] + ["--mass", "0.05", "--move"])]:
+        with pytest.raises(SystemExit, match=key):
+            classify.main(args + ["--resume"])
+    classify.main(setup["args"] + ["--mass", "0.05", "--resume"])  # the same settings continue
+    assert len(rows(setup["out"])) == 6
+
+
+def test_resume_refuses_results_without_a_run_record(setup):
+    """A results.csv of an earlier classify.py records no settings, so a resume could not check them."""
+    classify.main(setup["args"])
+    (setup["out"] / "run.json").unlink()
+    with pytest.raises(SystemExit, match="run.json"):
+        classify.main(setup["args"] + ["--resume"])

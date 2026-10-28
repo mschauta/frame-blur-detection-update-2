@@ -272,6 +272,10 @@ Both detectors respond to how a frame was coded, and not only to the optical blu
 - **Shot-start I-frames (A)** also differ in content position (the first frame after a cut). The mid-shot comparisons,
   the absence of drift after the I-frame (4.2), and video B, where no I-frame starts a shot, argue against content as
   the explanation, but do not exclude every content effect.
+- **Observational.** The encoders chose the frame types, and an I-frame differs from its neighbours in frame type,
+  quantiser and bits at once. Video B's fixed GOP places the I-frames independently of the content, but no analysis
+  here separates the frame type from its quantiser. A controlled re-encode can: known sharp source frames, such as the
+  etalon photos of section 8, coded under different GOP structures and quantisers.
 
 ## 8. Consequences for this project
 
@@ -287,7 +291,8 @@ Both detectors respond to how a frame was coded, and not only to the optical blu
 ## 9. Reproduction
 
 Requires the two videos (not published; SHA-256 in `data/checks_*.json`), the four Frame Blur Studio sessions (not
-published), Python 3.13 with numpy, scipy, opencv-python, Pillow, and ffmpeg / ffprobe 7.1. Run the commands in this
+published), Python 3.13 with the packages of `requirements-experiments.txt` in the repository root (numpy, scipy,
+opencv-python-headless), and ffmpeg / ffprobe 7.1. Run the commands in this
 folder. Without the videos and sessions, `analyse.py`, `figures.py` and `report_tables.py` still rerun every analysis
 from the per-frame data in `data/`.
 

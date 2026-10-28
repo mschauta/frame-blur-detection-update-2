@@ -22,8 +22,10 @@ The decision depends on the weight file:
 results.csv is written as the run goes: a row is added right after its image was copied or moved, so an interrupted
 run loses at most the image in hand. --resume continues such a run: images already in results.csv are skipped, and an
 image found in <output>/sharp or <output>/blur without a row (moved just before the interruption) is scored again in
-place and gets its row. --dry-run only scores, into results_dry_run.csv, and copies or moves nothing; a real run in
-the same output folder afterwards starts from scratch.
+place and gets its row. <output>/run.json records the run's settings (the weight file's sha256, the score, the
+threshold, the input folder, copy or move); --resume continues only with the same settings, so one results.csv never
+mixes two decision rules. --dry-run only scores, into results_dry_run.csv (settings in run_dry_run.json), and copies
+or moves nothing, also with --resume; a real run in the same output folder afterwards starts from scratch.
 
 Images are scored one at a time, as for the published numbers: batching and precision move the scores by a little.
 
@@ -35,6 +37,8 @@ from __future__ import annotations
 import argparse
 import csv
 import hashlib
+import json
+import math
 import shutil
 from pathlib import Path
 
@@ -96,9 +100,10 @@ def main(argv=None):
         if a.recall is not None:
             raise SystemExit("this weight file gives a blur mass M and stores no recall thresholds; use --mass "
                              "(README.md, Weights, gives reference points)")
-        if a.mass is None or a.mass < 0:
-            raise SystemExit("this weight file gives a blur mass M: choose the threshold with --mass (>= 0; "
-                             "README.md, Weights, gives reference points)")
+        # NaN or infinity would call every image sharp
+        if a.mass is None or not math.isfinite(a.mass) or a.mass < 0:
+            raise SystemExit("this weight file gives a blur mass M: choose the threshold with --mass (a finite "
+                             "number >= 0; README.md, Weights, gives reference points)")
         thr, field = a.mass, "blur_mass"
         rule = f"blurred when M > {thr:g}"
     else:
@@ -111,16 +116,26 @@ def main(argv=None):
     files = sorted(p for p in a.input.iterdir() if p.is_file() and p.suffix.lower() in EXTS)
     a.output.mkdir(parents=True, exist_ok=True)
     results = a.output / ("results_dry_run.csv" if a.dry_run else "results.csv")
+    run_file = a.output / ("run_dry_run.json" if a.dry_run else "run.json")
+    # What a resumed run must share with the run it continues.
+    run = {"weights_sha256": digest, "score": field, "threshold": thr, "input": str(a.input.resolve())}
+    if not a.dry_run:
+        run["move"] = a.move
     folders = {label: a.output / label for label in ("sharp", "blur")}
     done: set[str] = set()
     if a.resume:
+        if results.exists() and not run_file.exists():
+            raise SystemExit(f"{results} has no {run_file.name} (an earlier classify.py wrote it), so its settings "
+                             "cannot be checked; use a new output folder")
+        if run_file.exists():
+            saved = json.loads(run_file.read_text(encoding="utf-8"))
+            changed = [key for key in run.keys() | saved.keys() if saved.get(key) != run.get(key)]
+            if changed:
+                raise SystemExit(f"{run_file} records another {', '.join(sorted(changed))}; resume with the same "
+                                 "settings, or use a new output folder")
         if results.exists():
             with open(results, newline="", encoding="utf-8") as fh:
-                reader = csv.DictReader(fh)
-                if reader.fieldnames and reader.fieldnames != fields:
-                    raise SystemExit(f"{results} was written with another kind of weight file ({reader.fieldnames}); "
-                                     "resume it with the same weights, or use a new output folder")
-                done = {row["file"] for row in reader}
+                done = {row["file"] for row in csv.DictReader(fh)}
     else:
         if results.exists():
             raise SystemExit(f"{results} exists; use --resume to continue that run, or a new output folder")
@@ -131,9 +146,10 @@ def main(argv=None):
     if not a.dry_run:
         for folder in folders.values():
             folder.mkdir(exist_ok=True)
-    # Moved just before an interruption: in an output folder, but without a row.
+    run_file.write_text(json.dumps(run, indent=2) + "\n", encoding="utf-8")
+    # Moved just before an interruption: in an output folder, but without a row. A dry run leaves the folders alone.
     orphans = [p for folder in folders.values() if folder.exists() for p in sorted(folder.iterdir())
-               if a.resume and p.is_file() and p.suffix.lower() in EXTS and p.name not in done]
+               if a.resume and not a.dry_run and p.is_file() and p.suffix.lower() in EXTS and p.name not in done]
     todo = [f for f in files if f.name not in done and f.name not in {p.name for p in orphans}]
     print(f"{len(todo) + len(orphans)} images to score ({len(done)} already in results.csv), model input: "
           f"{meta['input_description']}, epoch {meta['epoch']}, {rule}, device {a.device}"
@@ -148,11 +164,12 @@ def main(argv=None):
         for i, f in enumerate(orphans + todo, 1):
             value = score(model, f, a.device, is_mass)
             label = "blur" if (value > thr if is_mass else value >= thr) else "sharp"
-            if f in orphans:
-                if f.parent != folders[label]:
-                    shutil.move(f, folders[label] / f.name)
-            elif not a.dry_run:
-                (shutil.move if a.move else shutil.copy2)(f, folders[label] / f.name)
+            if not a.dry_run:
+                if f in orphans:
+                    if f.parent != folders[label]:
+                        shutil.move(f, folders[label] / f.name)
+                else:
+                    (shutil.move if a.move else shutil.copy2)(f, folders[label] / f.name)
             # M keeps its significant digits: a tiny positive mass must not print as 0 next to "blur"
             writer.writerow({"file": f.name, field: f"{value:.7g}" if is_mass else f"{value:.6f}", "decision": label})
             fh.flush()
