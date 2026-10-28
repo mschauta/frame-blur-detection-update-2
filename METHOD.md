@@ -110,7 +110,7 @@ untaught evidence. `classify.py` uses the built-in readout.
   - the photo AUC.
 
   Source: [reproduction/training_eval.json](reproduction/training_eval.json).
-- **VLM labels on the held-out films** (to follow; README, Results). After the checkpoint was fixed, every labelled
+- **VLM labels on the held-out films** (README, Results). After the checkpoint was fixed, every labelled
   frame of the six held-out films is scored once with the published file and loader: 114,687 frames, the frames of
   Update 1's `heldout_films.json`.
   - **Classes, as in Update 1:** sharp = `sss` and blurred = `bbb` + `bsb`. One of the six films is `ssb`-dominant
@@ -121,9 +121,9 @@ untaught evidence. `classify.py` uses the built-in readout.
     resamples for both models, so the difference between them is paired.
   - **Recall points:** Update 2 has no stored threshold. Its r90 / r95 / r98 points are the M thresholds that catch
     90 / 95 / 98% of the blurred frames of the three validation films. They are then applied to the test films.
-    Where a point falls inside the M = 0 block, it cannot be reached, and the file says so.
+    A point inside the M = 0 block could not be reached; none of the three falls there.
 
-  Source, once computed: `reproduction/heldout_films.json`.
+  Source: [reproduction/heldout_films.json](reproduction/heldout_films.json).
 - **Photo ladder.** The ladder of Update 1, unchanged: the same 300 unseen photos, each with one fixed direction,
   L = 0 … 30 px, through H.264 CRF 23. Scored with the published file and loader. Source:
   [reproduction/photo_ladder_epoch19.json](reproduction/photo_ladder_epoch19.json).

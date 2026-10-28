@@ -78,6 +78,45 @@ def test_readme_quotes_the_photo_ladder():
     assert ring[0.5] - count[0.5] == 1 and ring[6.0] - count[6.0] == 12 and f"({ring[6.0]} instead of {count[6.0]})" in readme
 
 
+def test_readme_quotes_the_heldout_evaluation():
+    readme = flat(ROOT / "README.md")
+    ev = strict(ROOT / "reproduction" / "heldout_films.json")
+    groups = {g["group"]: g for g in ev["groups"]}
+    val, test, both = groups["validation films (3)"], groups["test films (3)"], groups["validation + test (6 films)"]
+    assert (both["n_sharp"], both["n_blur"]) == (71_010, 43_677) and "114,687 frames (71,010 sharp, 43,677 blurred)" in readme
+
+    def signed(v):
+        return f"{v:+.4f}".replace("-", "−")
+
+    def diff(g):
+        d = g["auc_difference_update2_M_minus_update1"]
+        return f"{signed(d['value'])} [{signed(d['ci95'][0])}, {signed(d['ci95'][1])}]"
+
+    for name, g in (("validation films (3)", val), ("test films (3)", test)):
+        row = f"| {name} | {g['auc']['update2_M']:.3f} | {g['auc']['update1']:.3f} | {diff(g)} |"
+        assert row in readme, row
+    a, ci = both["auc"], both["auc_ci95"]
+    assert (f"| all six | {a['update2_M']:.3f} [{ci['update2_M'][0]:.3f}, {ci['update2_M'][1]:.3f}] | "
+            f"{a['update1']:.3f} [{ci['update1'][0]:.3f}, {ci['update1'][1]:.3f}] | {diff(both)} |") in readme
+    per_film = [f["auc"]["update2_M"] - f["auc"]["update1"] for f in ev["films"]]
+    lower = sorted(-d for d in per_film if d < 0)
+    assert len(lower) == 5 and f"by {lower[0]:.4f} to {lower[-1]:.4f}, and higher on one, by {max(per_film):.4f}" in readme
+    points = ev["update2_recall_points"]
+    ops = test["operating_points"]
+    for r in ("r90", "r95", "r98"):
+        u2, u1 = ops[f"update2_{r}"], ops[f"update1_{r}"]
+        assert (f"| {r} | M > {points[r]['threshold']:g} | {u2['sharp_kept']:.1%} / {u2['blur_caught']:.1%} | "
+                f"{u1['sharp_kept']:.1%} / {u1['blur_caught']:.1%} |") in readme, r
+        assert f"{r}: M > {points[r]['threshold']:g}" in readme
+    m0 = ops["update2_M>0"]
+    assert f"| M > 0 | | {m0['sharp_kept']:.1%} / {m0['blur_caught']:.1%} | |" in readme
+    assert (f"same AUC as the built-in M ({a['update2_M_all_cells']:.4f} and {a['update2_M']:.4f})") in readme
+    assert (f"mean inner cell logit reaches AUC {a['update2_mean_inner_logit']:.3f}, the strongest inner cell "
+            f"{a['update2_strongest_inner_logit']:.3f}") in readme
+    z = both["m_zero_share"]
+    assert f"**M = 0** on {z['sharp']:.1%} of the sharp and {z['blurred']:.1%} of the blurred labelled frames" in readme
+
+
 def test_method_quotes_the_counts():
     method = flat(ROOT / "METHOD.md")
     for number in ("4,850,458", "160,142", "242,523", "80,841", "404,585", "114,687", "939,924"):

@@ -1,0 +1,359 @@
+{
+ "what": "every VLM-labelled frame of the 6 held-out films (none of their frames was trained on), scored once with the published Update 2 file after the checkpoint had been fixed, and Update 1's corpus scores of the same frames; sharp = sss (plus ssb in the one ssb-dominant film, sss / (sss + ssb) < 0.46), blurred = bbb + bsb, as in Update 1; film names withheld (the labels of Update 1's heldout_films.json)",
+ "readouts": {
+  "update2_M": "the built-in blur mass (inner cells)",
+  "update2_M_all_cells": "M over every cell",
+  "update2_mean_inner_logit": "the mean inner cell logit (tie-free, exploratory)",
+  "update2_strongest_inner_logit": "the strongest inner cell logit (exploratory)",
+  "update1": "Update 1's sigmoid score"
+ },
+ "auc_ci95": "95% percentile interval from a cluster bootstrap over shots (2000 resamples, shots drawn with replacement within each film); the same resamples for every readout, so the difference is paired",
+ "update2_recall_points": {
+  "r90": {
+   "threshold": 0.04731,
+   "caught_on_validation": 0.9000335457900034
+  },
+  "r95": {
+   "threshold": 0.007882,
+   "caught_on_validation": 0.9500167728950016
+  },
+  "r98": {
+   "threshold": 0.000887,
+   "caught_on_validation": 0.9800402549480041
+  }
+ },
+ "recall_points_rule": "from the blurred frames of the 3 validation films: blurred when M > threshold, the threshold just under the (1 - r) quantile of their M; applied unchanged to the test films",
+ "groups": [
+  {
+   "group": "validation films (3)",
+   "n_sharp": 37133,
+   "n_blur": 17886,
+   "auc": {
+    "update2_M": 0.9571788016203389,
+    "update2_M_all_cells": 0.9575626491545712,
+    "update2_mean_inner_logit": 0.8971713287015577,
+    "update2_strongest_inner_logit": 0.9505416419930499,
+    "update1": 0.9584151098351873
+   },
+   "auc_ci95": {
+    "update2_M": [
+     0.9493101364224924,
+     0.9645291727226887
+    ],
+    "update2_M_all_cells": [
+     0.9496194197259229,
+     0.9649540277511354
+    ],
+    "update2_mean_inner_logit": [
+     0.8800473564658193,
+     0.9137564574383813
+    ],
+    "update2_strongest_inner_logit": [
+     0.9417795070377648,
+     0.9584214086368565
+    ],
+    "update1": [
+     0.9512749437484194,
+     0.9650931467863075
+    ]
+   },
+   "auc_difference_update2_M_minus_update1": {
+    "value": -0.0012363082148484361,
+    "ci95": [
+     -0.0030991402189829128,
+     0.0005147268652429102
+    ]
+   },
+   "m_zero_share": {
+    "sharp": 0.3866910834029031,
+    "blurred": 0.005926422900592642
+   },
+   "operating_points": {
+    "update2_r90": {
+     "threshold_M": 0.04731,
+     "sharp_kept": 0.8798642716720976,
+     "blur_caught": 0.9000335457900034
+    },
+    "update2_r95": {
+     "threshold_M": 0.007882,
+     "sharp_kept": 0.7715778418118655,
+     "blur_caught": 0.9500167728950016
+    },
+    "update2_r98": {
+     "threshold_M": 0.000887,
+     "sharp_kept": 0.5985511539600894,
+     "blur_caught": 0.9800402549480041
+    },
+    "update2_M>0": {
+     "sharp_kept": 0.3866910834029031,
+     "blur_caught": 0.9940735770994074
+    },
+    "update1_r90": {
+     "threshold": 0.2324183,
+     "sharp_kept": 0.8856273395631917,
+     "blur_caught": 0.8915352789891535
+    },
+    "update1_r95": {
+     "threshold": 0.05490985,
+     "sharp_kept": 0.7986965771685562,
+     "blur_caught": 0.9441462596444147
+    },
+    "update1_r98": {
+     "threshold": 0.016399,
+     "sharp_kept": 0.6613524358387418,
+     "blur_caught": 0.9764620373476463
+    }
+   }
+  },
+  {
+   "group": "test films (3)",
+   "n_sharp": 33877,
+   "n_blur": 25791,
+   "auc": {
+    "update2_M": 0.9599198563805397,
+    "update2_M_all_cells": 0.9597495161007829,
+    "update2_mean_inner_logit": 0.94109909071997,
+    "update2_strongest_inner_logit": 0.9579447543701692,
+    "update1": 0.9662796153924559
+   },
+   "auc_ci95": {
+    "update2_M": [
+     0.9450608147381125,
+     0.9704991065004408
+    ],
+    "update2_M_all_cells": [
+     0.9447206665157125,
+     0.9703960641882762
+    ],
+    "update2_mean_inner_logit": [
+     0.9270978715097319,
+     0.953650813089872
+    ],
+    "update2_strongest_inner_logit": [
+     0.9435586491776642,
+     0.969086589198556
+    ],
+    "update1": [
+     0.9544226516882492,
+     0.9750096701426145
+    ]
+   },
+   "auc_difference_update2_M_minus_update1": {
+    "value": -0.006359759011916211,
+    "ci95": [
+     -0.009881637902485635,
+     -0.0036390853214722106
+    ]
+   },
+   "m_zero_share": {
+    "sharp": 0.4906868967145851,
+    "blurred": 0.02175177387460742
+   },
+   "operating_points": {
+    "update2_r90": {
+     "threshold_M": 0.04731,
+     "sharp_kept": 0.8834017179797503,
+     "blur_caught": 0.9237718584002171
+    },
+    "update2_r95": {
+     "threshold_M": 0.007882,
+     "sharp_kept": 0.7724414794698468,
+     "blur_caught": 0.9535109146601528
+    },
+    "update2_r98": {
+     "threshold_M": 0.000887,
+     "sharp_kept": 0.6414381438734245,
+     "blur_caught": 0.9689426544143306
+    },
+    "update2_M>0": {
+     "sharp_kept": 0.4906868967145851,
+     "blur_caught": 0.9782482261253925
+    },
+    "update1_r90": {
+     "threshold": 0.2324183,
+     "sharp_kept": 0.8923163208076276,
+     "blur_caught": 0.9224147958590206
+    },
+    "update1_r95": {
+     "threshold": 0.05490985,
+     "sharp_kept": 0.8096053369542757,
+     "blur_caught": 0.9534333682292272
+    },
+    "update1_r98": {
+     "threshold": 0.016399,
+     "sharp_kept": 0.6981728016058093,
+     "blur_caught": 0.9698344383699741
+    }
+   }
+  },
+  {
+   "group": "validation + test (6 films)",
+   "n_sharp": 71010,
+   "n_blur": 43677,
+   "auc": {
+    "update2_M": 0.9585486562216883,
+    "update2_M_all_cells": 0.9585830584046009,
+    "update2_mean_inner_logit": 0.9217463420977883,
+    "update2_strongest_inner_logit": 0.9543744565559564,
+    "update1": 0.9626186586902005
+   },
+   "auc_ci95": {
+    "update2_M": [
+     0.9495282485839336,
+     0.9660302287837159
+    ],
+    "update2_M_all_cells": [
+     0.9493455473631679,
+     0.9661909434905512
+    ],
+    "update2_mean_inner_logit": [
+     0.9095119576691717,
+     0.9329856161093009
+    ],
+    "update2_strongest_inner_logit": [
+     0.9451704619221295,
+     0.9624393929843829
+    ],
+    "update1": [
+     0.9548174369903918,
+     0.9691922005288856
+    ]
+   },
+   "auc_difference_update2_M_minus_update1": {
+    "value": -0.0040700024685121905,
+    "ci95": [
+     -0.006047144682882632,
+     -0.002408203103984584
+    ]
+   },
+   "m_zero_share": {
+    "sharp": 0.43630474581044926,
+    "blurred": 0.015271195365982097
+   },
+   "operating_points": {
+    "update2_r90": {
+     "threshold_M": 0.04731,
+     "sharp_kept": 0.8815518940994226,
+     "blur_caught": 0.9140508734574261
+    },
+    "update2_r95": {
+     "threshold_M": 0.007882,
+     "sharp_kept": 0.7719898605830164,
+     "blur_caught": 0.9520800421274355
+    },
+    "update2_r98": {
+     "threshold_M": 0.000887,
+     "sharp_kept": 0.6190114068441065,
+     "blur_caught": 0.973487190054262
+    },
+    "update2_M>0": {
+     "sharp_kept": 0.43630474581044926,
+     "blur_caught": 0.9847288046340179
+    },
+    "update1_r90": {
+     "threshold": 0.2324183,
+     "sharp_kept": 0.8888184762709478,
+     "blur_caught": 0.9097694438720608
+    },
+    "update1_r95": {
+     "threshold": 0.05490985,
+     "sharp_kept": 0.8039008590339389,
+     "blur_caught": 0.949630240172173
+    },
+    "update1_r98": {
+     "threshold": 0.016399,
+     "sharp_kept": 0.6789184621884242,
+     "blur_caught": 0.9725484808938343
+    }
+   }
+  }
+ ],
+ "films": [
+  {
+   "film": "test film B",
+   "role": "test",
+   "shots": 446,
+   "n_sharp": 20166,
+   "n_blur": 10786,
+   "auc": {
+    "update2_M": 0.9738460896016797,
+    "update2_M_all_cells": 0.9739363082447579,
+    "update2_mean_inner_logit": 0.9496850947078062,
+    "update2_strongest_inner_logit": 0.9700070147425911,
+    "update1": 0.97641315216468
+   }
+  },
+  {
+   "film": "test film C",
+   "role": "test",
+   "shots": 121,
+   "n_sharp": 4158,
+   "n_blur": 5525,
+   "auc": {
+    "update2_M": 0.9787063263533852,
+    "update2_M_all_cells": 0.9791074720486486,
+    "update2_mean_inner_logit": 0.9713570090040679,
+    "update2_strongest_inner_logit": 0.9744538903362433,
+    "update1": 0.9804125721772781
+   }
+  },
+  {
+   "film": "test film A",
+   "role": "test",
+   "shots": 378,
+   "n_sharp": 9553,
+   "n_blur": 9480,
+   "auc": {
+    "update2_M": 0.9409174377368807,
+    "update2_M_all_cells": 0.9404224422398513,
+    "update2_mean_inner_logit": 0.9219160228015058,
+    "update2_strongest_inner_logit": 0.94800808701709,
+    "update1": 0.9541684278824643
+   }
+  },
+  {
+   "film": "validation film A",
+   "role": "validation",
+   "shots": 396,
+   "n_sharp": 14138,
+   "n_blur": 6234,
+   "auc": {
+    "update2_M": 0.9589811765623178,
+    "update2_M_all_cells": 0.9595992307005609,
+    "update2_mean_inner_logit": 0.9530612032101373,
+    "update2_strongest_inner_logit": 0.9457917857492802,
+    "update1": 0.9585665176383867
+   }
+  },
+  {
+   "film": "validation film B",
+   "role": "validation",
+   "shots": 358,
+   "n_sharp": 17362,
+   "n_blur": 6978,
+   "auc": {
+    "update2_M": 0.9495838807034164,
+    "update2_M_all_cells": 0.9496682705357093,
+    "update2_mean_inner_logit": 0.8980386181871512,
+    "update2_strongest_inner_logit": 0.945767184630723,
+    "update1": 0.9535766613117422
+   }
+  },
+  {
+   "film": "validation film C",
+   "role": "validation",
+   "shots": 151,
+   "n_sharp": 5633,
+   "n_blur": 4674,
+   "auc": {
+    "update2_M": 0.9625407189630213,
+    "update2_M_all_cells": 0.9628834065957522,
+    "update2_mean_inner_logit": 0.8836242294608283,
+    "update2_strongest_inner_logit": 0.9628766079162001,
+    "update1": 0.9645042649750033
+   }
+  }
+ ],
+ "scoring": "device cuda (114,687 frames), ConvNeXt trunk under bfloat16 autocast, fingerprint float32, batch 1",
+ "complete": true
+}

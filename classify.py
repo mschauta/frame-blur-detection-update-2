@@ -1,9 +1,9 @@
 """Sort images into sharp / blur with a published weight file.
 
-    python classify.py --weights weights/v9_base_selfmap_v2_ep019.pt --input frames --output sorted --mass 0.05
+    python classify.py --weights weights/v9_base_selfmap_v2_ep019.pt --input frames --output sorted --mass 0.007882
     python classify.py --weights weights/v9_base_selfmap_v2_ep019.pt --input frames --output sorted --mass 0 --move
-    python classify.py --weights weights/v9_base_selfmap_v2_ep019.pt --input frames --output sorted --mass 0.05 --dry-run
-    python classify.py --weights weights/v9_base_selfmap_v2_ep019.pt --input frames --output sorted --mass 0.05 --resume
+    python classify.py --weights weights/v9_base_selfmap_v2_ep019.pt --input frames --output sorted --mass 0.007882 --dry-run
+    python classify.py --weights weights/v9_base_selfmap_v2_ep019.pt --input frames --output sorted --mass 0.007882 --resume
     python classify.py --weights weights/round3_base_p99_ep029.pt --input frames --output sorted --recall 95
 
 (the weight files are release assets: v9_base_selfmap_v2_ep019.pt of this repository, round3_base_p99_ep029.pt of
@@ -15,7 +15,8 @@ Every image of --input (png, jpg, jpeg, bmp, tif, tiff, webp; not recursive) is 
 The decision depends on the weight file:
   blur mass (Update 2, "pooling": "mass")  the score is the blur mass M (0 = no cell says blur; not a probability).
       There is no stored threshold: an image is called blurred when M > --mass. --mass 0 rejects every image with any
-      blur cell, the strictest choice; README.md, "Weights", gives reference points.
+      blur cell, the strictest choice. The thresholds that catch 90 / 95 / 98% of the blurred frames of the held-out
+      validation films are 0.04731 / 0.007882 / 0.000887 (README.md, "Weights").
   log-sum-exp (Update 1 and earlier)  the score is the sigmoid output, the threshold the one stored with the weights:
       it catches 90, 95 or 98% of the blurred frames of the validation split (--recall).
 

@@ -62,9 +62,9 @@ A model that learns from its predecessor learns its errors too. Two counterweigh
 
 ### Next
 
-- **The full evaluation:** all VLM-labelled frames of the held-out films, and the whole corpus scored with Update 2.
-  This waits for GPU time (see Results).
-- **A ConvNeXt-Small on the Update 1 recipe,** with the validity-mask leak fixed (Limitations). It is training now.
+- **The whole corpus scored with Update 2,** frame by frame against Update 1, on trained and held-out frames.
+- **A ConvNeXt-Small on the Update 1 recipe,** with the validity-mask leak fixed (Limitations). It has finished
+  training; its evaluation follows.
 - **Photo anchors through a multi-frame (I/P/B) encode,** after a controlled test. The two-video experiment shows why.
 
 ## What changed
@@ -105,17 +105,19 @@ The Update 1 and original weight files load unchanged with the same code.
 training. M is not a probability and has no stored threshold. Any cell count can be used with the map
 (`out["local"]`). The author's desktop tool counts every cell, and so did the two-video experiment.
 
-**Reference points** until the full held-out evaluation gives recall-based ones:
+**Reference points** for the built-in M, from the held-out evaluation (Results). Each is the threshold that catches
+90, 95 or 98% of the blurred frames of the three validation films:
 
-- M > 0 rejects a frame with any blur cell, the strictest choice;
-- 0.05 and 0.25 are the operating points of the two-video experiment. That experiment counted every cell, the ring
-  included, so with the built-in M the same values are starting points, not the same decisions. A threshold belongs to
-  the readout it was set on.
+- r90: M > 0.04731; r95: M > 0.007882; r98: M > 0.000887;
+- M > 0 rejects a frame with any blur cell, the strictest choice.
+
+The two-video experiment used 0.05 and 0.25, but it counted every cell, the ring included. A threshold belongs to the
+readout it was set on.
 
 ```
 pip install -r requirements.txt
 # put v9_base_selfmap_v2_ep019.pt into weights/
-python classify.py --weights weights/v9_base_selfmap_v2_ep019.pt --input frames --output sorted --mass 0.05
+python classify.py --weights weights/v9_base_selfmap_v2_ep019.pt --input frames --output sorted --mass 0.007882
 ```
 
 `classify.py` calls a frame blurred when M > `--mass`. It reports whether the weight file is a published release
@@ -203,13 +205,43 @@ This is Update 1's ladder, unchanged ([photo_ladder_epoch19.json](reproduction/p
 - **Counting the outer ring** adds a positive border cell on one photo from 0.5 px on, and 12 more photos at 6 px
   (52 instead of 40).
 
-### VLM labels on the held-out films: to follow
+### VLM labels on the held-out films
 
-Update 1 reported its AUC against the VLM labels on every labelled frame of the six held-out films (0.963). The same
-evaluation for Update 2, on the same 114,687 frames and with paired shot-bootstrap intervals against Update 1, needs
-about an hour of GPU time. The GPU is training the next model until the evening of 28 October 2026, so the result
-will be added here as `reproduction/heldout_films.json`. Until then, no accuracy claim against the VLM labels is made
-for Update 2.
+Every VLM-labelled frame of the six held-out films was scored once with the published file, after the checkpoint
+had been fixed: 114,687 frames (71,010 sharp, 43,677 blurred), the frames on which Update 1 reported AUC 0.963. They
+are compared with Update 1's scores of the same frames ([heldout_films.json](reproduction/heldout_films.json)). The
+95% intervals come from a cluster bootstrap over shots, with the same resamples for both models, so the difference
+is paired.
+
+| AUC against the VLM labels | Update 2 (M) | Update 1 | difference |
+|---|---|---|---|
+| validation films (3) | 0.957 | 0.958 | −0.0012 [−0.0031, +0.0005] |
+| test films (3) | 0.960 | 0.966 | −0.0064 [−0.0099, −0.0036] |
+| all six | 0.959 [0.950, 0.966] | 0.963 [0.955, 0.969] | −0.0041 [−0.0060, −0.0024] |
+
+- **Update 2 agrees slightly less with the VLM labels than Update 1.** It is lower on five of the six films, by
+  0.0017 to 0.0133, and higher on one, by 0.0004.
+- **The labels are Update 1's kind of target, not Update 2's.** Update 1 was trained on VLM labels of other films.
+  Update 2 never saw one: it learned Update 1's maps. Some loss of agreement with these labels is expected from
+  learning through Update 1. The labels are not ground truth either, so where the two models differ they do not
+  say which one is right.
+- **At equal catch, Update 2 keeps fewer sharp frames at the strict points.** Both models' thresholds come from the
+  three validation films (Update 2: the M that catches 90 / 95 / 98% of their blurred frames; Update 1: its stored
+  thresholds). Applied unchanged to the test films:
+
+  | test films | Update 2 threshold | Update 2: sharp kept / blurred caught | Update 1: sharp kept / blurred caught |
+  |---|---|---|---|
+  | r90 | M > 0.04731 | 88.3% / 92.4% | 89.2% / 92.2% |
+  | r95 | M > 0.007882 | 77.2% / 95.4% | 81.0% / 95.3% |
+  | r98 | M > 0.000887 | 64.1% / 96.9% | 69.8% / 97.0% |
+  | M > 0 | | 49.1% / 97.8% | |
+
+- **The outer ring does not matter here.** M over every cell gives the same AUC as the built-in M (0.9586 and
+  0.9585).
+- **The tie-free readouts are weaker frame scores** (exploratory): the mean inner cell logit reaches AUC 0.922, the
+  strongest inner cell 0.954. Whether the mean cell logit orders the frames inside the M = 0 block is not tested
+  here.
+- **M = 0** on 43.6% of the sharp and 1.5% of the blurred labelled frames.
 
 ### Two videos outside the training data: the coded frame type matters
 
@@ -253,7 +285,8 @@ model saw a sharp inter-coded frame with a known label.
   - the motion measurement: equal to Update 1;
   - the photos: exact, but only uniform camera blur, and only taught at the two ends of the scale. On the ladder
     Update 2 flips at 6.9 px, inside the untrained gap;
-  - the VLM labels: still to come.
+  - the VLM labels, Update 1's kind of target: AUC 0.959 against Update 1's 0.963, and fewer sharp frames kept at
+    the strict points.
 - **No ranking inside the M = 0 block** (29% of the held-out frames), which matters for picking the sharpest frame
   of a time window. The mean cell logit breaks the ties. On the photo ladder it orders 82% of the 0–3 px pairs, but
   on frames it is not validated.
