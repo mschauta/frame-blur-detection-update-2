@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="400" viewBox="0 0 860 400" role="img" aria-label="What differs in the decoded pixels: neighbour vs I-frame of the same shot">
+<style>
+svg { --surface:#fcfcfb; --ink:#0b0b0b; --ink2:#52514e; --grid:#e4e3df; --series-1:#2a78d6; --series-2:#eb6834; }
+@media (prefers-color-scheme: dark) {
+  svg { --surface:#1a1a19; --ink:#f0efec; --ink2:#c3c2b7; --grid:#3a3936; --series-1:#3987e5; --series-2:#d95926; }
+}
+text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; fill: var(--ink2); font-size: 12px; }
+.title { fill: var(--ink); font-size: 15px; font-weight: 600; }
+.panel { fill: var(--ink); font-size: 13px; font-weight: 600; }
+.axis { stroke: var(--ink2); stroke-width: 1; }
+.grid { stroke: var(--grid); stroke-width: 1; }
+.ref { stroke: var(--ink2); stroke-width: 1; stroke-dasharray: 4 3; }
+</style>
+<rect width="860" height="400" fill="var(--surface)"/>
+<text class="title" x="16" y="26">What differs in the decoded pixels: neighbour vs I-frame of the same shot</text>
+<text x="16" y="46">Median relative difference (neighbour ÷ I-frame − 1), mid-shot and shot-start comparisons; 95% intervals.</text>
+<text class="panel" x="240" y="80">Video A · 2.6 Mbit/s</text>
+<text x="240.0" y="376" text-anchor="middle">-48%</text>
+<text x="375.0" y="376" text-anchor="middle">+0%</text>
+<text x="510.0" y="376" text-anchor="middle">+48%</text>
+<line class="axis" x1="240" x2="510" y1="360" y2="360"/>
+<text x="375.0" y="394" text-anchor="middle">relative difference</text>
+<line class="ref" x1="375.0" x2="375.0" y1="90" y2="360"/>
+<text x="16" y="123" style="fill:var(--ink)">flat-area residual</text>
+<line x1="433.5" x2="489.9" y1="115.0" y2="115.0" stroke="var(--ink)" stroke-width="2"/><circle cx="452.6" cy="115.0" r="5" fill="var(--ink)" stroke="var(--surface)" stroke-width="2"><title>Video A · 2.6 Mbit/s · flat-area residual · mid-shot I: +27.5% [+20.8, +40.8]; neighbour higher in 46%</title></circle>
+<line x1="431.0" x2="437.6" y1="129.0" y2="129.0" stroke="var(--ink2)" stroke-width="2"/><circle cx="434.2" cy="129.0" r="5" fill="var(--ink2)" stroke="var(--surface)" stroke-width="2"><title>Video A · 2.6 Mbit/s · flat-area residual · shot-start I: +21.0% [+19.8, +22.2]; neighbour higher in 91%</title></circle>
+<text x="16" y="165" style="fill:var(--ink)">flat / strong residual</text>
+<line x1="437.4" x2="497.7" y1="157.0" y2="157.0" stroke="var(--ink)" stroke-width="2"/><circle cx="456.8" cy="157.0" r="5" fill="var(--ink)" stroke="var(--surface)" stroke-width="2"><title>Video A · 2.6 Mbit/s · flat / strong residual · mid-shot I: +29.0% [+22.1, +43.5]; neighbour higher in 45%</title></circle>
+<line x1="431.8" x2="438.8" y1="171.0" y2="171.0" stroke="var(--ink2)" stroke-width="2"/><circle cx="435.4" cy="171.0" r="5" fill="var(--ink2)" stroke="var(--surface)" stroke-width="2"><title>Video A · 2.6 Mbit/s · flat / strong residual · shot-start I: +21.4% [+20.1, +22.6]; neighbour higher in 92%</title></circle>
+<text x="16" y="207" style="fill:var(--ink)">near-zero residual share</text>
+<line x1="365.5" x2="375.0" y1="199.0" y2="199.0" stroke="var(--ink)" stroke-width="2"/><circle cx="374.4" cy="199.0" r="5" fill="var(--ink)" stroke="var(--surface)" stroke-width="2"><title>Video A · 2.6 Mbit/s · near-zero residual share · mid-shot I: -0.2% [-3.4, -0.0]; neighbour higher in 30%</title></circle>
+<line x1="366.1" x2="367.2" y1="213.0" y2="213.0" stroke="var(--ink2)" stroke-width="2"/><circle cx="366.8" cy="213.0" r="5" fill="var(--ink2)" stroke="var(--surface)" stroke-width="2"><title>Video A · 2.6 Mbit/s · near-zero residual share · shot-start I: -2.9% [-3.2, -2.8]; neighbour higher in 11%</title></circle>
+<text x="16" y="249" style="fill:var(--ink)">8 px block pattern</text>
+<line x1="349.8" x2="375.0" y1="241.0" y2="241.0" stroke="var(--ink)" stroke-width="2"/><circle cx="368.0" cy="241.0" r="5" fill="var(--ink)" stroke="var(--surface)" stroke-width="2"><title>Video A · 2.6 Mbit/s · 8 px block pattern · mid-shot I: -2.5% [-8.9, -0.0]; neighbour higher in 22%</title></circle>
+<line x1="352.4" x2="354.5" y1="255.0" y2="255.0" stroke="var(--ink2)" stroke-width="2"/><circle cx="353.4" cy="255.0" r="5" fill="var(--ink2)" stroke="var(--surface)" stroke-width="2"><title>Video A · 2.6 Mbit/s · 8 px block pattern · shot-start I: -7.7% [-8.0, -7.3]; neighbour higher in 6%</title></circle>
+<text x="16" y="291" style="fill:var(--ink)">strong-cell residual</text>
+<line x1="364.3" x2="375.0" y1="283.0" y2="283.0" stroke="var(--ink)" stroke-width="2"/><circle cx="375.0" cy="283.0" r="5" fill="var(--ink)" stroke="var(--surface)" stroke-width="2"><title>Video A · 2.6 Mbit/s · strong-cell residual · mid-shot I: +0.0% [-3.8, +0.0]; neighbour higher in 50%</title></circle>
+<line x1="369.1" x2="372.8" y1="297.0" y2="297.0" stroke="var(--ink2)" stroke-width="2"/><circle cx="370.4" cy="297.0" r="5" fill="var(--ink2)" stroke="var(--surface)" stroke-width="2"><title>Video A · 2.6 Mbit/s · strong-cell residual · shot-start I: -1.6% [-2.1, -0.8]; neighbour higher in 42%</title></circle>
+<text x="16" y="333" style="fill:var(--ink)">mean |Laplacian|</text>
+<line x1="375.1" x2="416.2" y1="325.0" y2="325.0" stroke="var(--ink)" stroke-width="2"/><circle cx="375.9" cy="325.0" r="5" fill="var(--ink)" stroke="var(--surface)" stroke-width="2"><title>Video A · 2.6 Mbit/s · mean |Laplacian| · mid-shot I: +0.3% [+0.0, +14.6]; neighbour higher in 78%</title></circle>
+<line x1="397.6" x2="402.1" y1="339.0" y2="339.0" stroke="var(--ink2)" stroke-width="2"/><circle cx="400.0" cy="339.0" r="5" fill="var(--ink2)" stroke="var(--surface)" stroke-width="2"><title>Video A · 2.6 Mbit/s · mean |Laplacian| · shot-start I: +8.9% [+8.0, +9.6]; neighbour higher in 85%</title></circle>
+<text class="panel" x="550" y="80">Video B · 5.7 Mbit/s</text>
+<text x="550.0" y="376" text-anchor="middle">-16%</text>
+<text x="685.0" y="376" text-anchor="middle">+0%</text>
+<text x="820.0" y="376" text-anchor="middle">+16%</text>
+<line class="axis" x1="550" x2="820" y1="360" y2="360"/>
+<text x="685.0" y="394" text-anchor="middle">relative difference</text>
+<line class="ref" x1="685.0" x2="685.0" y1="90" y2="360"/>
+<line x1="685.7" x2="701.2" y1="115.0" y2="115.0" stroke="var(--ink)" stroke-width="2"/><circle cx="693.5" cy="115.0" r="5" fill="var(--ink)" stroke="var(--surface)" stroke-width="2"><title>Video B · 5.7 Mbit/s · flat-area residual · mid-shot I: +1.0% [+0.1, +2.0]; neighbour higher in 56%</title></circle>
+<line x1="697.7" x2="715.4" y1="157.0" y2="157.0" stroke="var(--ink)" stroke-width="2"/><circle cx="707.0" cy="157.0" r="5" fill="var(--ink)" stroke="var(--surface)" stroke-width="2"><title>Video B · 5.7 Mbit/s · flat / strong residual · mid-shot I: +2.7% [+1.5, +3.7]; neighbour higher in 64%</title></circle>
+<line x1="678.9" x2="683.0" y1="199.0" y2="199.0" stroke="var(--ink)" stroke-width="2"/><circle cx="681.1" cy="199.0" r="5" fill="var(--ink)" stroke="var(--surface)" stroke-width="2"><title>Video B · 5.7 Mbit/s · near-zero residual share · mid-shot I: -0.5% [-0.7, -0.2]; neighbour higher in 38%</title></circle>
+<line x1="562.3" x2="579.5" y1="241.0" y2="241.0" stroke="var(--ink)" stroke-width="2"/><circle cx="570.5" cy="241.0" r="5" fill="var(--ink)" stroke="var(--surface)" stroke-width="2"><title>Video B · 5.7 Mbit/s · 8 px block pattern · mid-shot I: -14.0% [-15.0, -12.9]; neighbour higher in 1%</title></circle>
+<line x1="669.0" x2="674.9" y1="283.0" y2="283.0" stroke="var(--ink)" stroke-width="2"/><circle cx="672.1" cy="283.0" r="5" fill="var(--ink)" stroke="var(--surface)" stroke-width="2"><title>Video B · 5.7 Mbit/s · strong-cell residual · mid-shot I: -1.6% [-2.0, -1.2]; neighbour higher in 32%</title></circle>
+<line x1="673.5" x2="680.9" y1="325.0" y2="325.0" stroke="var(--ink)" stroke-width="2"/><circle cx="676.1" cy="325.0" r="5" fill="var(--ink)" stroke="var(--surface)" stroke-width="2"><title>Video B · 5.7 Mbit/s · mean |Laplacian| · mid-shot I: -1.1% [-1.4, -0.5]; neighbour higher in 39%</title></circle>
+<circle cx="21" cy="382" r="5" fill="var(--ink)"/><text x="31" y="386">mid-shot I-frame</text><circle cx="161" cy="382" r="5" fill="var(--ink2)"/><text x="171" y="386">shot-start I-frame</text>
+</svg>

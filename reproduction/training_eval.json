@@ -1,0 +1,565 @@
+{
+ "what": "the per-epoch evaluation of the v9 run (EMA weights, CUDA bfloat16, native frames cut to 1920 x 1072): held-out frames = a fixed hash-chosen ~10% of the six held-out films' frames, train-eval frames = a fixed ~1/600 of the training frames (each seen once in training, like every training frame), photos = the validation split of the photo pool with the evaluation recipe; the published checkpoint is epoch 19",
+ "definitions": {
+  "M": "mean of max(0, cell logit) over the inner cells (outer ring left out), the built-in readout",
+  "bce_vs_round3": "soft binary cross-entropy (nats) of the cell logits against the round3 cell probabilities over the taught cells (outer ring and measurement-vetoed blocks left out)",
+  "target_entropy": "the entropy of those soft targets over the same cells: the lowest bce_vs_round3 any model can reach; fit_above_target_entropy = bce_vs_round3 - target_entropy",
+  "spearman_m_r3": "Spearman correlation of v9's M with the round3 M computed from round3's own cell map",
+  "spearman_region_motion": "Spearman correlation of M with the measured region motion (px), frames with a measurement",
+  "m_zero_share": "share of frames with M = 0 (no inner cell says blur)",
+  "auc": "photos: AUC of M for blurred (10-30 px) against sharp (0-3 px)"
+ },
+ "reference": {
+  "heldout_frames": {
+   "n": 16056,
+   "target_entropy": 0.04606852301665044,
+   "round3_m_zero_share": 0.17781514698555057,
+   "round3_m_median": 0.01117992214858532,
+   "round3_strongest_inner_cell_at_most": {
+    "0": 0.17781514698555057,
+    "0.5": 0.30599152964623816,
+    "1": 0.39032137518684606,
+    "1.5": 0.46661684105630297
+   },
+   "round3_spearman_region_motion": 0.6911350218935793
+  },
+  "train_eval_frames": {
+   "n": 7899,
+   "target_entropy": 0.04077741209187799,
+   "round3_m_zero_share": 0.25142423091530575,
+   "round3_m_median": 0.004758800379931927,
+   "round3_strongest_inner_cell_at_most": {
+    "0": 0.25142423091530575,
+    "0.5": 0.3858716293201671,
+    "1": 0.46107102164830993,
+    "1.5": 0.5252563615647551
+   },
+   "round3_spearman_region_motion": 0.673115121047621
+  },
+  "photos": {
+   "n": 4000
+  }
+ },
+ "epochs": [
+  {
+   "epoch": 0,
+   "lr_factor_at_end": 1.0,
+   "heldout_frames": {
+    "bce_vs_round3": 0.07930264880282432,
+    "spearman_m_r3": 0.94785319259865,
+    "spearman_region_motion": 0.6664998339995118,
+    "m_median": 0.0008545797318220139,
+    "m_zero_share": 0.3863976083707025,
+    "fit_above_target_entropy": 0.033234125786173886
+   },
+   "train_eval_frames": {
+    "bce_vs_round3": 0.07086482494558556,
+    "spearman_m_r3": 0.934650040327638,
+    "spearman_region_motion": 0.6624877462512733,
+    "m_median": 0.00011301451013423502,
+    "m_zero_share": 0.4558804912014179,
+    "fit_above_target_entropy": 0.03008741285370757
+   },
+   "validation_photos": {
+    "auc": 0.999749125,
+    "m_median_sharp": 0.0,
+    "m_median_blurred": 12.373196601867676,
+    "m_zero_share_sharp": 0.9965
+   }
+  },
+  {
+   "epoch": 1,
+   "lr_factor_at_end": 1.0,
+   "heldout_frames": {
+    "bce_vs_round3": 0.07374138225028877,
+    "spearman_m_r3": 0.9570632514101398,
+    "spearman_region_motion": 0.6736416969151063,
+    "m_median": 0.0018634264124557376,
+    "m_zero_share": 0.36048829098156454,
+    "fit_above_target_entropy": 0.027672859233638332
+   },
+   "train_eval_frames": {
+    "bce_vs_round3": 0.06533249625328136,
+    "spearman_m_r3": 0.945371782977631,
+    "spearman_region_motion": 0.6590422719569536,
+    "m_median": 0.0003312927728984505,
+    "m_zero_share": 0.43195341182428154,
+    "fit_above_target_entropy": 0.024555084161403368
+   },
+   "validation_photos": {
+    "auc": 0.9999995,
+    "m_median_sharp": 0.0,
+    "m_median_blurred": 13.910460472106934,
+    "m_zero_share_sharp": 0.9975
+   }
+  },
+  {
+   "epoch": 2,
+   "lr_factor_at_end": 1.0,
+   "heldout_frames": {
+    "bce_vs_round3": 0.07260871330922991,
+    "spearman_m_r3": 0.9587608025921995,
+    "spearman_region_motion": 0.6764682204582562,
+    "m_median": 0.002065367647446692,
+    "m_zero_share": 0.3520802192326856,
+    "fit_above_target_entropy": 0.026540190292579473
+   },
+   "train_eval_frames": {
+    "bce_vs_round3": 0.06425070354535185,
+    "spearman_m_r3": 0.9485719871099236,
+    "spearman_region_motion": 0.6592026244839174,
+    "m_median": 0.00037006245111115277,
+    "m_zero_share": 0.4246107102164831,
+    "fit_above_target_entropy": 0.023473291453473863
+   },
+   "validation_photos": {
+    "auc": 0.99999975,
+    "m_median_sharp": 0.0,
+    "m_median_blurred": 15.05156421661377,
+    "m_zero_share_sharp": 0.9985
+   }
+  },
+  {
+   "epoch": 3,
+   "lr_factor_at_end": 1.0,
+   "heldout_frames": {
+    "bce_vs_round3": 0.07226028496481054,
+    "spearman_m_r3": 0.9590460430407087,
+    "spearman_region_motion": 0.6758794796898236,
+    "m_median": 0.0021558540174737573,
+    "m_zero_share": 0.34803188839063276,
+    "fit_above_target_entropy": 0.026191761948160107
+   },
+   "train_eval_frames": {
+    "bce_vs_round3": 0.06380545819752845,
+    "spearman_m_r3": 0.9481842049757717,
+    "spearman_region_motion": 0.6574660059976424,
+    "m_median": 0.00038198300171643496,
+    "m_zero_share": 0.42600329155589317,
+    "fit_above_target_entropy": 0.023028046105650457
+   },
+   "validation_photos": {
+    "auc": 0.99999975,
+    "m_median_sharp": 0.0,
+    "m_median_blurred": 13.029426097869873,
+    "m_zero_share_sharp": 0.9985
+   }
+  },
+  {
+   "epoch": 4,
+   "lr_factor_at_end": 1.0,
+   "heldout_frames": {
+    "bce_vs_round3": 0.07206471879359887,
+    "spearman_m_r3": 0.959012001009623,
+    "spearman_region_motion": 0.6753976309049285,
+    "m_median": 0.0021802521077916026,
+    "m_zero_share": 0.35114598903836575,
+    "fit_above_target_entropy": 0.02599619577694843
+   },
+   "train_eval_frames": {
+    "bce_vs_round3": 0.06361121307538971,
+    "spearman_m_r3": 0.9491645655691995,
+    "spearman_region_motion": 0.6587320518682707,
+    "m_median": 0.00040647663990966976,
+    "m_zero_share": 0.42283833396632486,
+    "fit_above_target_entropy": 0.022833800983511718
+   },
+   "validation_photos": {
+    "auc": 1.0,
+    "m_median_sharp": 0.0,
+    "m_median_blurred": 14.24071741104126,
+    "m_zero_share_sharp": 0.9985
+   }
+  },
+  {
+   "epoch": 5,
+   "lr_factor_at_end": 1.0,
+   "heldout_frames": {
+    "bce_vs_round3": 0.0717674263104715,
+    "spearman_m_r3": 0.9591879586891741,
+    "spearman_region_motion": 0.6752081389093944,
+    "m_median": 0.0023487155558541417,
+    "m_zero_share": 0.3470976581963129,
+    "fit_above_target_entropy": 0.025698903293821067
+   },
+   "train_eval_frames": {
+    "bce_vs_round3": 0.06316149128533514,
+    "spearman_m_r3": 0.9499919833202555,
+    "spearman_region_motion": 0.6584928269576642,
+    "m_median": 0.00043111349805258214,
+    "m_zero_share": 0.42068616280541843,
+    "fit_above_target_entropy": 0.022384079193457154
+   },
+   "validation_photos": {
+    "auc": 0.99999975,
+    "m_median_sharp": 0.0,
+    "m_median_blurred": 15.65579891204834,
+    "m_zero_share_sharp": 0.998
+   }
+  },
+  {
+   "epoch": 6,
+   "lr_factor_at_end": 1.0,
+   "heldout_frames": {
+    "bce_vs_round3": 0.07054935154301059,
+    "spearman_m_r3": 0.9606827469498288,
+    "spearman_region_motion": 0.6778463494702869,
+    "m_median": 0.002362402738071978,
+    "m_zero_share": 0.3464748380667663,
+    "fit_above_target_entropy": 0.024480828526360153
+   },
+   "train_eval_frames": {
+    "bce_vs_round3": 0.06234206724043203,
+    "spearman_m_r3": 0.9503858844954143,
+    "spearman_region_motion": 0.6574050750170777,
+    "m_median": 0.0004806419019587338,
+    "m_zero_share": 0.4153690340549437,
+    "fit_above_target_entropy": 0.02156465514855404
+   },
+   "validation_photos": {
+    "auc": 1.0,
+    "m_median_sharp": 0.0,
+    "m_median_blurred": 15.716308116912842,
+    "m_zero_share_sharp": 0.9985
+   }
+  },
+  {
+   "epoch": 7,
+   "lr_factor_at_end": 1.0,
+   "heldout_frames": {
+    "bce_vs_round3": 0.07001895416376083,
+    "spearman_m_r3": 0.961088604530112,
+    "spearman_region_motion": 0.6785549638126461,
+    "m_median": 0.002624368527904153,
+    "m_zero_share": 0.3430493273542601,
+    "fit_above_target_entropy": 0.023950431147110395
+   },
+   "train_eval_frames": {
+    "bce_vs_round3": 0.06188654791215369,
+    "spearman_m_r3": 0.9516983251303457,
+    "spearman_region_motion": 0.6604261478206307,
+    "m_median": 0.00047548534348607063,
+    "m_zero_share": 0.41422964932269907,
+    "fit_above_target_entropy": 0.021109135820275703
+   },
+   "validation_photos": {
+    "auc": 1.0,
+    "m_median_sharp": 0.0,
+    "m_median_blurred": 15.807724475860596,
+    "m_zero_share_sharp": 0.999
+   }
+  },
+  {
+   "epoch": 8,
+   "lr_factor_at_end": 1.0,
+   "heldout_frames": {
+    "bce_vs_round3": 0.06970619157914132,
+    "spearman_m_r3": 0.9616734946169818,
+    "spearman_region_motion": 0.6793528838216903,
+    "m_median": 0.002582813613116741,
+    "m_zero_share": 0.3401843547583458,
+    "fit_above_target_entropy": 0.02363766856249088
+   },
+   "train_eval_frames": {
+    "bce_vs_round3": 0.061422167367764686,
+    "spearman_m_r3": 0.9521712089356124,
+    "spearman_region_motion": 0.6607488636624117,
+    "m_median": 0.0005058835376985371,
+    "m_zero_share": 0.4141030510191163,
+    "fit_above_target_entropy": 0.020644755275886696
+   },
+   "validation_photos": {
+    "auc": 1.0,
+    "m_median_sharp": 0.0,
+    "m_median_blurred": 15.601207733154297,
+    "m_zero_share_sharp": 0.999
+   }
+  },
+  {
+   "epoch": 9,
+   "lr_factor_at_end": 1.0,
+   "heldout_frames": {
+    "bce_vs_round3": 0.06940935461187572,
+    "spearman_m_r3": 0.9625318980657049,
+    "spearman_region_motion": 0.6780038975824183,
+    "m_median": 0.002720226300880313,
+    "m_zero_share": 0.3373193821624315,
+    "fit_above_target_entropy": 0.023340831595225285
+   },
+   "train_eval_frames": {
+    "bce_vs_round3": 0.06121908555166663,
+    "spearman_m_r3": 0.9540385878553568,
+    "spearman_region_motion": 0.6607313815938323,
+    "m_median": 0.0005354860331863165,
+    "m_zero_share": 0.40688694771490064,
+    "fit_above_target_entropy": 0.020441673459788638
+   },
+   "validation_photos": {
+    "auc": 1.0,
+    "m_median_sharp": 0.0,
+    "m_median_blurred": 16.53750514984131,
+    "m_zero_share_sharp": 0.999
+   }
+  },
+  {
+   "epoch": 10,
+   "lr_factor_at_end": 1.0,
+   "heldout_frames": {
+    "bce_vs_round3": 0.06916556587739417,
+    "spearman_m_r3": 0.9628064803030987,
+    "spearman_region_motion": 0.6786977321116943,
+    "m_median": 0.002753743901848793,
+    "m_zero_share": 0.3358246138515197,
+    "fit_above_target_entropy": 0.02309704286074373
+   },
+   "train_eval_frames": {
+    "bce_vs_round3": 0.06093437702748157,
+    "spearman_m_r3": 0.9536463861803663,
+    "spearman_region_motion": 0.661041752012129,
+    "m_median": 0.0005203664768487215,
+    "m_zero_share": 0.4073933409292316,
+    "fit_above_target_entropy": 0.02015696493560358
+   },
+   "validation_photos": {
+    "auc": 1.0,
+    "m_median_sharp": 0.0,
+    "m_median_blurred": 17.08462905883789,
+    "m_zero_share_sharp": 0.999
+   }
+  },
+  {
+   "epoch": 11,
+   "lr_factor_at_end": 1.0,
+   "heldout_frames": {
+    "bce_vs_round3": 0.06883959354489111,
+    "spearman_m_r3": 0.9636379299333784,
+    "spearman_region_motion": 0.679057688901907,
+    "m_median": 0.0029959905659779906,
+    "m_zero_share": 0.3323368211260588,
+    "fit_above_target_entropy": 0.02277107052824067
+   },
+   "train_eval_frames": {
+    "bce_vs_round3": 0.06068786560104882,
+    "spearman_m_r3": 0.954810873494252,
+    "spearman_region_motion": 0.6622550793015927,
+    "m_median": 0.0005778525373898447,
+    "m_zero_share": 0.40232940878592227,
+    "fit_above_target_entropy": 0.019910453509170832
+   },
+   "validation_photos": {
+    "auc": 1.0,
+    "m_median_sharp": 0.0,
+    "m_median_blurred": 17.35636043548584,
+    "m_zero_share_sharp": 0.999
+   }
+  },
+  {
+   "epoch": 12,
+   "lr_factor_at_end": 1.0,
+   "heldout_frames": {
+    "bce_vs_round3": 0.0689073697685993,
+    "spearman_m_r3": 0.9630720956046361,
+    "spearman_region_motion": 0.6786614077454776,
+    "m_median": 0.002858068677596748,
+    "m_zero_share": 0.3317140009965122,
+    "fit_above_target_entropy": 0.022838846751948867
+   },
+   "train_eval_frames": {
+    "bce_vs_round3": 0.060666212392579154,
+    "spearman_m_r3": 0.9540655605439795,
+    "spearman_region_motion": 0.6611161157987512,
+    "m_median": 0.0006015663384459913,
+    "m_zero_share": 0.40536776807190783,
+    "fit_above_target_entropy": 0.019888800300701164
+   },
+   "validation_photos": {
+    "auc": 1.0,
+    "m_median_sharp": 0.0,
+    "m_median_blurred": 15.8924560546875,
+    "m_zero_share_sharp": 0.9985
+   }
+  },
+  {
+   "epoch": 13,
+   "lr_factor_at_end": 1.0,
+   "heldout_frames": {
+    "bce_vs_round3": 0.06883109024576972,
+    "spearman_m_r3": 0.9628138168631686,
+    "spearman_region_motion": 0.678348411349918,
+    "m_median": 0.002829994075000286,
+    "m_zero_share": 0.3353263577478824,
+    "fit_above_target_entropy": 0.022762567229119283
+   },
+   "train_eval_frames": {
+    "bce_vs_round3": 0.06054071845327754,
+    "spearman_m_r3": 0.9534686375908314,
+    "spearman_region_motion": 0.6586962296604268,
+    "m_median": 0.0005725049995817244,
+    "m_zero_share": 0.4091657171793898,
+    "fit_above_target_entropy": 0.01976330636139955
+   },
+   "validation_photos": {
+    "auc": 1.0,
+    "m_median_sharp": 0.0,
+    "m_median_blurred": 15.588840961456299,
+    "m_zero_share_sharp": 0.9995
+   }
+  },
+  {
+   "epoch": 14,
+   "lr_factor_at_end": 1.0,
+   "heldout_frames": {
+    "bce_vs_round3": 0.06877095202677794,
+    "spearman_m_r3": 0.9633131641439368,
+    "spearman_region_motion": 0.6778688994958627,
+    "m_median": 0.00291490217205137,
+    "m_zero_share": 0.33482810164424515,
+    "fit_above_target_entropy": 0.0227024290101275
+   },
+   "train_eval_frames": {
+    "bce_vs_round3": 0.060563326803528834,
+    "spearman_m_r3": 0.9542715715732146,
+    "spearman_region_motion": 0.661628008457772,
+    "m_median": 0.0005560804274864495,
+    "m_zero_share": 0.4063805545005697,
+    "fit_above_target_entropy": 0.019785914711650844
+   },
+   "validation_photos": {
+    "auc": 1.0,
+    "m_median_sharp": 0.0,
+    "m_median_blurred": 14.89778757095337,
+    "m_zero_share_sharp": 0.9995
+   }
+  },
+  {
+   "epoch": 15,
+   "lr_factor_at_end": 1.0,
+   "heldout_frames": {
+    "bce_vs_round3": 0.06863221329289103,
+    "spearman_m_r3": 0.9630158357847698,
+    "spearman_region_motion": 0.6799494178854072,
+    "m_median": 0.003070521866902709,
+    "m_zero_share": 0.3321499750871948,
+    "fit_above_target_entropy": 0.02256369027624059
+   },
+   "train_eval_frames": {
+    "bce_vs_round3": 0.06027321007246033,
+    "spearman_m_r3": 0.9543825758054776,
+    "spearman_region_motion": 0.6615429218168394,
+    "m_median": 0.0006213012966327369,
+    "m_zero_share": 0.40372199012533233,
+    "fit_above_target_entropy": 0.01949579798058234
+   },
+   "validation_photos": {
+    "auc": 1.0,
+    "m_median_sharp": 0.0,
+    "m_median_blurred": 17.739161491394043,
+    "m_zero_share_sharp": 0.999
+   }
+  },
+  {
+   "epoch": 16,
+   "lr_factor_at_end": 0.855672930731459,
+   "heldout_frames": {
+    "bce_vs_round3": 0.06818240834650045,
+    "spearman_m_r3": 0.9635017130346328,
+    "spearman_region_motion": 0.6787716906294983,
+    "m_median": 0.0030711425933986902,
+    "m_zero_share": 0.3294718485301445,
+    "fit_above_target_entropy": 0.022113885329850015
+   },
+   "train_eval_frames": {
+    "bce_vs_round3": 0.05990339504698909,
+    "spearman_m_r3": 0.9560076089187403,
+    "spearman_region_motion": 0.6591895892557676,
+    "m_median": 0.0006926017813384533,
+    "m_zero_share": 0.39827826307127484,
+    "fit_above_target_entropy": 0.0191259829551111
+   },
+   "validation_photos": {
+    "auc": 1.0,
+    "m_median_sharp": 0.0,
+    "m_median_blurred": 18.356009483337402,
+    "m_zero_share_sharp": 0.9995
+   }
+  },
+  {
+   "epoch": 17,
+   "lr_factor_at_end": 0.5055285035514419,
+   "heldout_frames": {
+    "bce_vs_round3": 0.06672794637626296,
+    "spearman_m_r3": 0.9676929670242168,
+    "spearman_region_motion": 0.6806454262036369,
+    "m_median": 0.0036374246701598167,
+    "m_zero_share": 0.3138390632785252,
+    "fit_above_target_entropy": 0.020659423359612523
+   },
+   "train_eval_frames": {
+    "bce_vs_round3": 0.05861140622273343,
+    "spearman_m_r3": 0.9604853746966313,
+    "spearman_region_motion": 0.6616159820998867,
+    "m_median": 0.0008981478167697787,
+    "m_zero_share": 0.3852386378022534,
+    "fit_above_target_entropy": 0.017833994130855436
+   },
+   "validation_photos": {
+    "auc": 1.0,
+    "m_median_sharp": 0.0,
+    "m_median_blurred": 19.095232009887695,
+    "m_zero_share_sharp": 0.9995
+   }
+  },
+  {
+   "epoch": 18,
+   "lr_factor_at_end": 0.15507388378510528,
+   "heldout_frames": {
+    "bce_vs_round3": 0.06528336189338468,
+    "spearman_m_r3": 0.9714605894674282,
+    "spearman_region_motion": 0.6837560643531736,
+    "m_median": 0.004252813523635268,
+    "m_zero_share": 0.30013702042850027,
+    "fit_above_target_entropy": 0.019214838876734246
+   },
+   "train_eval_frames": {
+    "bce_vs_round3": 0.05730772548141732,
+    "spearman_m_r3": 0.9656739526750415,
+    "spearman_region_motion": 0.663769343538745,
+    "m_median": 0.0012039125431329012,
+    "m_zero_share": 0.36966704646157744,
+    "fit_above_target_entropy": 0.01653031338953933
+   },
+   "validation_photos": {
+    "auc": 1.0,
+    "m_median_sharp": 0.0,
+    "m_median_blurred": 20.343432426452637,
+    "m_zero_share_sharp": 0.9995
+   }
+  },
+  {
+   "epoch": 19,
+   "lr_factor_at_end": 0.010000483504292054,
+   "heldout_frames": {
+    "bce_vs_round3": 0.06468392841362594,
+    "spearman_m_r3": 0.9734923208150472,
+    "spearman_region_motion": 0.6850549549118984,
+    "m_median": 0.0046481851022690535,
+    "m_zero_share": 0.29067015445939215,
+    "fit_above_target_entropy": 0.018615405396975503
+   },
+   "train_eval_frames": {
+    "bce_vs_round3": 0.056779857327169635,
+    "spearman_m_r3": 0.9678058815819524,
+    "spearman_region_motion": 0.6635814880346486,
+    "m_median": 0.001367442193441093,
+    "m_zero_share": 0.3632105329788581,
+    "fit_above_target_entropy": 0.016002445235291644
+   },
+   "validation_photos": {
+    "auc": 1.0,
+    "m_median_sharp": 0.0,
+    "m_median_blurred": 20.55295181274414,
+    "m_zero_share_sharp": 0.9995
+   }
+  }
+ ]
+}

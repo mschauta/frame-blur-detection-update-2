@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="400" viewBox="0 0 920 400" role="img" aria-label="Photo ladder: Update 1 and Update 2">
+<style>
+svg { --surface:#fcfcfb; --ink:#0b0b0b; --ink2:#52514e; --grid:#e4e3df; --series-1:#2a78d6; --series-2:#eb6834; }
+@media (prefers-color-scheme: dark) {
+  svg { --surface:#1a1a19; --ink:#f0efec; --ink2:#c3c2b7; --grid:#3a3936; --series-1:#3987e5; --series-2:#d95926; }
+}
+text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; fill: var(--ink2); font-size: 12px; }
+.title { fill: var(--ink); font-size: 15px; font-weight: 600; }
+.panel { fill: var(--ink); font-size: 13px; font-weight: 600; }
+.key { fill: var(--ink); }
+.axis { stroke: var(--ink2); stroke-width: 1; }
+.grid { stroke: var(--grid); stroke-width: 1; }
+</style>
+<rect width="920" height="400" fill="var(--surface)"/>
+<text class="title" x="16" y="26">Photo ladder: 300 unseen photos, known camera motion, H.264 CRF 23</text>
+<circle cx="21" cy="48" r="5" fill="var(--series-1)"/><text class="key" x="31" y="52">Update 1: threshold r95 (band r90 … r98)</text>
+<circle cx="335" cy="48" r="5" fill="var(--series-2)"/><text class="key" x="345" y="52">Update 2: M &gt; 0.05 (band M &gt; 0.25 … M &gt; 0)</text>
+<text class="panel" x="70" y="88">Called blurred</text>
+<line class="grid" x1="70" x2="450" y1="336.0" y2="336.0"/><text x="64" y="340.0" text-anchor="end">0%</text>
+<line class="grid" x1="70" x2="450" y1="277.0" y2="277.0"/><text x="64" y="281.0" text-anchor="end">25%</text>
+<line class="grid" x1="70" x2="450" y1="218.0" y2="218.0"/><text x="64" y="222.0" text-anchor="end">50%</text>
+<line class="grid" x1="70" x2="450" y1="159.0" y2="159.0"/><text x="64" y="163.0" text-anchor="end">75%</text>
+<line class="grid" x1="70" x2="450" y1="100.0" y2="100.0"/><text x="64" y="104.0" text-anchor="end">100%</text>
+<text x="70.0" y="352" text-anchor="middle">0</text>
+<text x="108.0" y="352" text-anchor="middle">3</text>
+<text x="146.0" y="352" text-anchor="middle">6</text>
+<text x="196.7" y="352" text-anchor="middle">10</text>
+<text x="272.7" y="352" text-anchor="middle">16</text>
+<text x="323.3" y="352" text-anchor="middle">20</text>
+<text x="374.0" y="352" text-anchor="middle">24</text>
+<text x="450.0" y="352" text-anchor="middle">30</text>
+<line class="axis" x1="70" x2="450" y1="336" y2="336"/>
+<text x="260.0" y="370" text-anchor="middle">added camera motion L (px)</text>
+<text transform="translate(26,218.0) rotate(-90)" text-anchor="middle">share of the photos</text>
+<polygon points="70.0,336.0 76.3,336.0 82.7,336.0 89.0,336.0 95.3,336.0 101.7,335.2 108.0,336.0 120.7,336.0 133.3,334.4 146.0,334.4 171.3,316.3 196.7,133.0 222.0,100.0 272.7,100.0 323.3,100.0 374.0,100.0 450.0,100.0 450.0,100.0 374.0,100.0 323.3,100.0 272.7,100.0 222.0,100.0 196.7,148.8 171.3,321.1 146.0,335.2 133.3,335.2 120.7,336.0 108.0,336.0 101.7,336.0 95.3,336.0 89.0,336.0 82.7,336.0 76.3,336.0 70.0,336.0" fill="var(--series-1)" fill-opacity="0.16"/>
+<polyline points="70.0,336.0 76.3,336.0 82.7,336.0 89.0,336.0 95.3,336.0 101.7,336.0 108.0,336.0 120.7,336.0 133.3,335.2 146.0,335.2 171.3,318.7 196.7,140.1 222.0,100.0 272.7,100.0 323.3,100.0 374.0,100.0 450.0,100.0" fill="none" stroke="var(--series-1)" stroke-width="2"/>
+<circle cx="70.0" cy="336.0" r="4" fill="var(--series-1)" stroke="var(--surface)" stroke-width="2"><title>Update 1, 0 px: r90 0%, r95 0%, r98 0%</title></circle>
+<circle cx="76.3" cy="336.0" r="4" fill="var(--series-1)" stroke="var(--surface)" stroke-width="2"><title>Update 1, 0.5 px: r90 0%, r95 0%, r98 0%</title></circle>
+<circle cx="82.7" cy="336.0" r="4" fill="var(--series-1)" stroke="var(--surface)" stroke-width="2"><title>Update 1, 1 px: r90 0%, r95 0%, r98 0%</title></circle>
+<circle cx="89.0" cy="336.0" r="4" fill="var(--series-1)" stroke="var(--surface)" stroke-width="2"><title>Update 1, 1.5 px: r90 0%, r95 0%, r98 0%</title></circle>
+<circle cx="95.3" cy="336.0" r="4" fill="var(--series-1)" stroke="var(--surface)" stroke-width="2"><title>Update 1, 2 px: r90 0%, r95 0%, r98 0%</title></circle>
+<circle cx="101.7" cy="336.0" r="4" fill="var(--series-1)" stroke="var(--surface)" stroke-width="2"><title>Update 1, 2.5 px: r90 0%, r95 0%, r98 0%</title></circle>
+<circle cx="108.0" cy="336.0" r="4" fill="var(--series-1)" stroke="var(--surface)" stroke-width="2"><title>Update 1, 3 px: r90 0%, r95 0%, r98 0%</title></circle>
+<circle cx="120.7" cy="336.0" r="4" fill="var(--series-1)" stroke="var(--surface)" stroke-width="2"><title>Update 1, 4 px: r90 0%, r95 0%, r98 0%</title></circle>
+<circle cx="133.3" cy="335.2" r="4" fill="var(--series-1)" stroke="var(--surface)" stroke-width="2"><title>Update 1, 5 px: r90 0%, r95 0%, r98 1%</title></circle>
+<circle cx="146.0" cy="335.2" r="4" fill="var(--series-1)" stroke="var(--surface)" stroke-width="2"><title>Update 1, 6 px: r90 0%, r95 0%, r98 1%</title></circle>
+<circle cx="171.3" cy="318.7" r="4" fill="var(--series-1)" stroke="var(--surface)" stroke-width="2"><title>Update 1, 8 px: r90 6%, r95 7%, r98 8%</title></circle>
+<circle cx="196.7" cy="140.1" r="4" fill="var(--series-1)" stroke="var(--surface)" stroke-width="2"><title>Update 1, 10 px: r90 79%, r95 83%, r98 86%</title></circle>
+<circle cx="222.0" cy="100.0" r="4" fill="var(--series-1)" stroke="var(--surface)" stroke-width="2"><title>Update 1, 12 px: r90 100%, r95 100%, r98 100%</title></circle>
+<circle cx="272.7" cy="100.0" r="4" fill="var(--series-1)" stroke="var(--surface)" stroke-width="2"><title>Update 1, 16 px: r90 100%, r95 100%, r98 100%</title></circle>
+<circle cx="323.3" cy="100.0" r="4" fill="var(--series-1)" stroke="var(--surface)" stroke-width="2"><title>Update 1, 20 px: r90 100%, r95 100%, r98 100%</title></circle>
+<circle cx="374.0" cy="100.0" r="4" fill="var(--series-1)" stroke="var(--surface)" stroke-width="2"><title>Update 1, 24 px: r90 100%, r95 100%, r98 100%</title></circle>
+<circle cx="450.0" cy="100.0" r="4" fill="var(--series-1)" stroke="var(--surface)" stroke-width="2"><title>Update 1, 30 px: r90 100%, r95 100%, r98 100%</title></circle>
+<polygon points="70.0,336.0 76.3,336.0 82.7,336.0 89.0,336.0 95.3,336.0 101.7,336.0 108.0,335.2 120.7,335.2 133.3,332.9 146.0,304.5 171.3,100.8 196.7,100.0 222.0,100.0 272.7,100.0 323.3,100.0 374.0,100.0 450.0,100.0 450.0,100.0 374.0,100.0 323.3,100.0 272.7,100.0 222.0,100.0 196.7,100.0 171.3,100.8 146.0,319.5 133.3,335.2 120.7,336.0 108.0,336.0 101.7,336.0 95.3,336.0 89.0,336.0 82.7,336.0 76.3,336.0 70.0,336.0" fill="var(--series-2)" fill-opacity="0.16"/>
+<polyline points="70.0,336.0 76.3,336.0 82.7,336.0 89.0,336.0 95.3,336.0 101.7,336.0 108.0,336.0 120.7,336.0 133.3,334.4 146.0,317.1 171.3,100.8 196.7,100.0 222.0,100.0 272.7,100.0 323.3,100.0 374.0,100.0 450.0,100.0" fill="none" stroke="var(--series-2)" stroke-width="2"/>
+<circle cx="70.0" cy="336.0" r="4" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>Update 2, 0 px: M &gt; 0 0%, M &gt; 0.05 0%, M &gt; 0.25 0%</title></circle>
+<circle cx="76.3" cy="336.0" r="4" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>Update 2, 0.5 px: M &gt; 0 0%, M &gt; 0.05 0%, M &gt; 0.25 0%</title></circle>
+<circle cx="82.7" cy="336.0" r="4" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>Update 2, 1 px: M &gt; 0 0%, M &gt; 0.05 0%, M &gt; 0.25 0%</title></circle>
+<circle cx="89.0" cy="336.0" r="4" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>Update 2, 1.5 px: M &gt; 0 0%, M &gt; 0.05 0%, M &gt; 0.25 0%</title></circle>
+<circle cx="95.3" cy="336.0" r="4" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>Update 2, 2 px: M &gt; 0 0%, M &gt; 0.05 0%, M &gt; 0.25 0%</title></circle>
+<circle cx="101.7" cy="336.0" r="4" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>Update 2, 2.5 px: M &gt; 0 0%, M &gt; 0.05 0%, M &gt; 0.25 0%</title></circle>
+<circle cx="108.0" cy="336.0" r="4" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>Update 2, 3 px: M &gt; 0 0%, M &gt; 0.05 0%, M &gt; 0.25 0%</title></circle>
+<circle cx="120.7" cy="336.0" r="4" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>Update 2, 4 px: M &gt; 0 0%, M &gt; 0.05 0%, M &gt; 0.25 0%</title></circle>
+<circle cx="133.3" cy="334.4" r="4" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>Update 2, 5 px: M &gt; 0 1%, M &gt; 0.05 1%, M &gt; 0.25 0%</title></circle>
+<circle cx="146.0" cy="317.1" r="4" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>Update 2, 6 px: M &gt; 0 13%, M &gt; 0.05 8%, M &gt; 0.25 7%</title></circle>
+<circle cx="171.3" cy="100.8" r="4" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>Update 2, 8 px: M &gt; 0 100%, M &gt; 0.05 100%, M &gt; 0.25 100%</title></circle>
+<circle cx="196.7" cy="100.0" r="4" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>Update 2, 10 px: M &gt; 0 100%, M &gt; 0.05 100%, M &gt; 0.25 100%</title></circle>
+<circle cx="222.0" cy="100.0" r="4" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>Update 2, 12 px: M &gt; 0 100%, M &gt; 0.05 100%, M &gt; 0.25 100%</title></circle>
+<circle cx="272.7" cy="100.0" r="4" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>Update 2, 16 px: M &gt; 0 100%, M &gt; 0.05 100%, M &gt; 0.25 100%</title></circle>
+<circle cx="323.3" cy="100.0" r="4" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>Update 2, 20 px: M &gt; 0 100%, M &gt; 0.05 100%, M &gt; 0.25 100%</title></circle>
+<circle cx="374.0" cy="100.0" r="4" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>Update 2, 24 px: M &gt; 0 100%, M &gt; 0.05 100%, M &gt; 0.25 100%</title></circle>
+<circle cx="450.0" cy="100.0" r="4" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>Update 2, 30 px: M &gt; 0 100%, M &gt; 0.05 100%, M &gt; 0.25 100%</title></circle>
+<text class="panel" x="540" y="88">Update 2: blur mass M (median, quartiles)</text>
+<line class="grid" x1="540" x2="900" y1="336.0" y2="336.0"/><text x="534" y="340.0" text-anchor="end">0</text>
+<line class="grid" x1="540" x2="900" y1="288.8" y2="288.8"/><text x="534" y="292.8" text-anchor="end">5</text>
+<line class="grid" x1="540" x2="900" y1="241.6" y2="241.6"/><text x="534" y="245.6" text-anchor="end">10</text>
+<line class="grid" x1="540" x2="900" y1="194.4" y2="194.4"/><text x="534" y="198.4" text-anchor="end">15</text>
+<line class="grid" x1="540" x2="900" y1="147.2" y2="147.2"/><text x="534" y="151.2" text-anchor="end">20</text>
+<line class="grid" x1="540" x2="900" y1="100.0" y2="100.0"/><text x="534" y="104.0" text-anchor="end">25</text>
+<text x="540.0" y="352" text-anchor="middle">0</text>
+<text x="576.0" y="352" text-anchor="middle">3</text>
+<text x="612.0" y="352" text-anchor="middle">6</text>
+<text x="660.0" y="352" text-anchor="middle">10</text>
+<text x="732.0" y="352" text-anchor="middle">16</text>
+<text x="780.0" y="352" text-anchor="middle">20</text>
+<text x="828.0" y="352" text-anchor="middle">24</text>
+<text x="900.0" y="352" text-anchor="middle">30</text>
+<line class="axis" x1="540" x2="900" y1="336" y2="336"/>
+<text x="720.0" y="370" text-anchor="middle">added camera motion L (px)</text>
+<text transform="translate(496,218.0) rotate(-90)" text-anchor="middle">M</text>
+<polygon points="540.0,336.0 546.0,336.0 552.0,336.0 558.0,336.0 564.0,336.0 570.0,336.0 576.0,336.0 588.0,336.0 600.0,336.0 612.0,336.0 636.0,166.6 660.0,136.6 684.0,129.0 732.0,124.8 780.0,124.2 828.0,126.0 900.0,128.8 900.0,150.3 828.0,146.9 780.0,145.4 732.0,144.8 684.0,150.5 660.0,160.1 636.0,200.5 612.0,336.0 600.0,336.0 588.0,336.0 576.0,336.0 570.0,336.0 564.0,336.0 558.0,336.0 552.0,336.0 546.0,336.0 540.0,336.0" fill="var(--series-2)" fill-opacity="0.16"/>
+<polyline points="540.0,336.0 546.0,336.0 552.0,336.0 558.0,336.0 564.0,336.0 570.0,336.0 576.0,336.0 588.0,336.0 600.0,336.0 612.0,336.0 636.0,180.5 660.0,148.1 684.0,139.1 732.0,134.3 780.0,134.2 828.0,135.7 900.0,138.6" fill="none" stroke="var(--series-2)" stroke-width="2"/>
+<circle cx="540.0" cy="336.0" r="4" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>0 px: median M 0, quartiles 0 … 0</title></circle>
+<circle cx="546.0" cy="336.0" r="4" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>0.5 px: median M 0, quartiles 0 … 0</title></circle>
+<circle cx="552.0" cy="336.0" r="4" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>1 px: median M 0, quartiles 0 … 0</title></circle>
+<circle cx="558.0" cy="336.0" r="4" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>1.5 px: median M 0, quartiles 0 … 0</title></circle>
+<circle cx="564.0" cy="336.0" r="4" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>2 px: median M 0, quartiles 0 … 0</title></circle>
+<circle cx="570.0" cy="336.0" r="4" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>2.5 px: median M 0, quartiles 0 … 0</title></circle>
+<circle cx="576.0" cy="336.0" r="4" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>3 px: median M 0, quartiles 0 … 0</title></circle>
+<circle cx="588.0" cy="336.0" r="4" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>4 px: median M 0, quartiles 0 … 0</title></circle>
+<circle cx="600.0" cy="336.0" r="4" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>5 px: median M 0, quartiles 0 … 0</title></circle>
+<circle cx="612.0" cy="336.0" r="4" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>6 px: median M 0, quartiles 0 … 0</title></circle>
+<circle cx="636.0" cy="180.5" r="4" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>8 px: median M 16.5, quartiles 14.4 … 17.9</title></circle>
+<circle cx="660.0" cy="148.1" r="4" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>10 px: median M 19.9, quartiles 18.6 … 21.1</title></circle>
+<circle cx="684.0" cy="139.1" r="4" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>12 px: median M 20.9, quartiles 19.6 … 21.9</title></circle>
+<circle cx="732.0" cy="134.3" r="4" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>16 px: median M 21.4, quartiles 20.3 … 22.4</title></circle>
+<circle cx="780.0" cy="134.2" r="4" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>20 px: median M 21.4, quartiles 20.2 … 22.4</title></circle>
+<circle cx="828.0" cy="135.7" r="4" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>24 px: median M 21.2, quartiles 20 … 22.2</title></circle>
+<circle cx="900.0" cy="138.6" r="4" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>30 px: median M 20.9, quartiles 19.7 … 21.9</title></circle>
+</svg>

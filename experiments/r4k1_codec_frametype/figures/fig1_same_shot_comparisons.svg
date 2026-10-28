@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="470" viewBox="0 0 860 470" role="img" aria-label="Inside a shot: how often is the reference frame scored sharper than its neighbour?">
+<style>
+svg { --surface:#fcfcfb; --ink:#0b0b0b; --ink2:#52514e; --grid:#e4e3df; --series-1:#2a78d6; --series-2:#eb6834; }
+@media (prefers-color-scheme: dark) {
+  svg { --surface:#1a1a19; --ink:#f0efec; --ink2:#c3c2b7; --grid:#3a3936; --series-1:#3987e5; --series-2:#d95926; }
+}
+text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; fill: var(--ink2); font-size: 12px; }
+.title { fill: var(--ink); font-size: 15px; font-weight: 600; }
+.panel { fill: var(--ink); font-size: 13px; font-weight: 600; }
+.axis { stroke: var(--ink2); stroke-width: 1; }
+.grid { stroke: var(--grid); stroke-width: 1; }
+.ref { stroke: var(--ink2); stroke-width: 1; stroke-dasharray: 4 3; }
+</style>
+<rect width="860" height="470" fill="var(--surface)"/>
+<text class="title" x="16" y="26">Inside a shot: how often is the reference frame scored sharper than its neighbour?</text>
+<text x="16" y="46">Share of same-shot comparisons, 95% intervals (shot bootstrap). Ties (equal scores) are neither.</text>
+<circle cx="21" cy="66" r="5" fill="var(--series-1)"/><text x="31" y="70" style="fill:var(--ink)">round3 (log-sum-exp)</text>
+<circle cx="183" cy="66" r="5" fill="var(--series-2)"/><text x="193" y="70" style="fill:var(--ink)">v9 (blur mass)</text>
+<circle cx="491" cy="66" r="5" fill="var(--ink2)"/><text x="501" y="70">reference sharper</text><circle cx="631" cy="66" r="4" fill="var(--surface)" stroke="var(--ink2)" stroke-width="2"/><text x="641" y="70">neighbour sharper</text>
+<text class="panel" x="260" y="100">Video A · 2.6 Mbit/s</text>
+<text x="260.0" y="426" text-anchor="middle">0%</text>
+<text x="325.0" y="426" text-anchor="middle">25%</text>
+<text x="390.0" y="426" text-anchor="middle">50%</text>
+<text x="455.0" y="426" text-anchor="middle">75%</text>
+<text x="520.0" y="426" text-anchor="middle">100%</text>
+<line class="axis" x1="260" x2="520" y1="410" y2="410"/>
+<text x="390.0" y="444" text-anchor="middle">share of comparisons</text>
+<line class="ref" x1="390.0" x2="390.0" y1="110" y2="410"/>
+<text x="16" y="164" style="fill:var(--ink)">mid-shot I-frame vs its neighbours</text>
+<circle cx="328.6" cy="148.0" r="4" fill="var(--surface)" stroke="var(--series-1)" stroke-width="2"><title>Video A · 2.6 Mbit/s · mid-shot I-frame vs its neighbours · round3 (log-sum-exp): reference sharper 74% [59%–97%], tie 0%, neighbour sharper 26%; 292 comparisons, 43 shots</title></circle>
+<line x1="414.5" x2="513.0" y1="148.0" y2="148.0" stroke="var(--series-1)" stroke-width="2"/><circle cx="451.4" cy="148.0" r="5" fill="var(--series-1)" stroke="var(--surface)" stroke-width="2"><title>Video A · 2.6 Mbit/s · mid-shot I-frame vs its neighbours · round3 (log-sum-exp): reference sharper 74% [59%–97%], tie 0%, neighbour sharper 26%; 292 comparisons, 43 shots</title></circle>
+<circle cx="328.6" cy="172.0" r="4" fill="var(--surface)" stroke="var(--series-2)" stroke-width="2"><title>Video A · 2.6 Mbit/s · mid-shot I-frame vs its neighbours · v9 (blur mass): reference sharper 58% [49%–84%], tie 16%, neighbour sharper 26%; 292 comparisons, 43 shots</title></circle>
+<line x1="387.3" x2="477.4" y1="172.0" y2="172.0" stroke="var(--series-2)" stroke-width="2"/><circle cx="409.6" cy="172.0" r="5" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>Video A · 2.6 Mbit/s · mid-shot I-frame vs its neighbours · v9 (blur mass): reference sharper 58% [49%–84%], tie 16%, neighbour sharper 26%; 292 comparisons, 43 shots</title></circle>
+<text x="520" y="194" text-anchor="end" style="font-size:11px">292 comparisons · 43 shots</text>
+<text x="16" y="264" style="fill:var(--ink)">shot-start I-frame vs next 2 frames</text>
+<circle cx="277.0" cy="248.0" r="4" fill="var(--surface)" stroke="var(--series-1)" stroke-width="2"><title>Video A · 2.6 Mbit/s · shot-start I-frame vs next 2 frames · round3 (log-sum-exp): reference sharper 93% [92%–95%], tie 0%, neighbour sharper 7%; 1206 comparisons, 603 shots</title></circle>
+<line x1="498.0" x2="507.9" y1="248.0" y2="248.0" stroke="var(--series-1)" stroke-width="2"/><circle cx="503.0" cy="248.0" r="5" fill="var(--series-1)" stroke="var(--surface)" stroke-width="2"><title>Video A · 2.6 Mbit/s · shot-start I-frame vs next 2 frames · round3 (log-sum-exp): reference sharper 93% [92%–95%], tie 0%, neighbour sharper 7%; 1206 comparisons, 603 shots</title></circle>
+<circle cx="281.8" cy="272.0" r="4" fill="var(--surface)" stroke="var(--series-2)" stroke-width="2"><title>Video A · 2.6 Mbit/s · shot-start I-frame vs next 2 frames · v9 (blur mass): reference sharper 86% [84%–89%], tie 5%, neighbour sharper 8%; 1206 comparisons, 603 shots</title></circle>
+<line x1="477.7" x2="491.1" y1="272.0" y2="272.0" stroke="var(--series-2)" stroke-width="2"/><circle cx="484.2" cy="272.0" r="5" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>Video A · 2.6 Mbit/s · shot-start I-frame vs next 2 frames · v9 (blur mass): reference sharper 86% [84%–89%], tie 5%, neighbour sharper 8%; 1206 comparisons, 603 shots</title></circle>
+<text x="520" y="294" text-anchor="end" style="font-size:11px">1,206 comparisons · 603 shots</text>
+<text x="16" y="364" style="fill:var(--ink)">P-frame vs its B neighbours</text>
+<circle cx="441.3" cy="348.0" r="4" fill="var(--surface)" stroke="var(--series-1)" stroke-width="2"><title>Video A · 2.6 Mbit/s · P-frame vs its B neighbours · round3 (log-sum-exp): reference sharper 30% [28%–33%], tie 0%, neighbour sharper 70%; 19777 comparisons, 906 shots</title></circle>
+<line x1="332.4" x2="345.5" y1="348.0" y2="348.0" stroke="var(--series-1)" stroke-width="2"/><circle cx="338.6" cy="348.0" r="5" fill="var(--series-1)" stroke="var(--surface)" stroke-width="2"><title>Video A · 2.6 Mbit/s · P-frame vs its B neighbours · round3 (log-sum-exp): reference sharper 30% [28%–33%], tie 0%, neighbour sharper 70%; 19777 comparisons, 906 shots</title></circle>
+<circle cx="448.0" cy="372.0" r="4" fill="var(--surface)" stroke="var(--series-2)" stroke-width="2"><title>Video A · 2.6 Mbit/s · P-frame vs its B neighbours · v9 (blur mass): reference sharper 21% [19%–23%], tie 7%, neighbour sharper 72%; 19777 comparisons, 906 shots</title></circle>
+<line x1="310.4" x2="318.6" y1="372.0" y2="372.0" stroke="var(--series-2)" stroke-width="2"/><circle cx="314.3" cy="372.0" r="5" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>Video A · 2.6 Mbit/s · P-frame vs its B neighbours · v9 (blur mass): reference sharper 21% [19%–23%], tie 7%, neighbour sharper 72%; 19777 comparisons, 906 shots</title></circle>
+<text x="520" y="394" text-anchor="end" style="font-size:11px">19,777 comparisons · 906 shots</text>
+<text class="panel" x="560" y="100">Video B · 5.7 Mbit/s</text>
+<text x="560.0" y="426" text-anchor="middle">0%</text>
+<text x="625.0" y="426" text-anchor="middle">25%</text>
+<text x="690.0" y="426" text-anchor="middle">50%</text>
+<text x="755.0" y="426" text-anchor="middle">75%</text>
+<text x="820.0" y="426" text-anchor="middle">100%</text>
+<line class="axis" x1="560" x2="820" y1="410" y2="410"/>
+<text x="690.0" y="444" text-anchor="middle">share of comparisons</text>
+<line class="ref" x1="690.0" x2="690.0" y1="110" y2="410"/>
+<circle cx="642.9" cy="148.0" r="4" fill="var(--surface)" stroke="var(--series-1)" stroke-width="2"><title>Video B · 5.7 Mbit/s · mid-shot I-frame vs its neighbours · round3 (log-sum-exp): reference sharper 68% [65%–72%], tie 0%, neighbour sharper 32%; 662 comparisons, 83 shots</title></circle>
+<line x1="727.8" x2="748.0" y1="148.0" y2="148.0" stroke="var(--series-1)" stroke-width="2"/><circle cx="737.1" cy="148.0" r="5" fill="var(--series-1)" stroke="var(--surface)" stroke-width="2"><title>Video B · 5.7 Mbit/s · mid-shot I-frame vs its neighbours · round3 (log-sum-exp): reference sharper 68% [65%–72%], tie 0%, neighbour sharper 32%; 662 comparisons, 83 shots</title></circle>
+<circle cx="622.4" cy="172.0" r="4" fill="var(--surface)" stroke="var(--series-2)" stroke-width="2"><title>Video B · 5.7 Mbit/s · mid-shot I-frame vs its neighbours · v9 (blur mass): reference sharper 39% [33%–45%], tie 37%, neighbour sharper 24%; 662 comparisons, 83 shots</title></circle>
+<line x1="646.3" x2="676.5" y1="172.0" y2="172.0" stroke="var(--series-2)" stroke-width="2"/><circle cx="661.3" cy="172.0" r="5" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>Video B · 5.7 Mbit/s · mid-shot I-frame vs its neighbours · v9 (blur mass): reference sharper 39% [33%–45%], tie 37%, neighbour sharper 24%; 662 comparisons, 83 shots</title></circle>
+<text x="820" y="194" text-anchor="end" style="font-size:11px">662 comparisons · 83 shots</text>
+<text x="568" y="264">none: this encoder puts no I-frame at shot starts</text>
+<circle cx="682.9" cy="348.0" r="4" fill="var(--surface)" stroke="var(--series-1)" stroke-width="2"><title>Video B · 5.7 Mbit/s · P-frame vs its B neighbours · round3 (log-sum-exp): reference sharper 53% [48%–57%], tie 0%, neighbour sharper 47%; 774 comparisons, 81 shots</title></circle>
+<line x1="685.7" x2="707.6" y1="348.0" y2="348.0" stroke="var(--series-1)" stroke-width="2"/><circle cx="697.1" cy="348.0" r="5" fill="var(--series-1)" stroke="var(--surface)" stroke-width="2"><title>Video B · 5.7 Mbit/s · P-frame vs its B neighbours · round3 (log-sum-exp): reference sharper 53% [48%–57%], tie 0%, neighbour sharper 47%; 774 comparisons, 81 shots</title></circle>
+<circle cx="640.3" cy="372.0" r="4" fill="var(--surface)" stroke="var(--series-2)" stroke-width="2"><title>Video B · 5.7 Mbit/s · P-frame vs its B neighbours · v9 (blur mass): reference sharper 34% [29%–39%], tie 35%, neighbour sharper 31%; 774 comparisons, 81 shots</title></circle>
+<line x1="634.7" x2="662.2" y1="372.0" y2="372.0" stroke="var(--series-2)" stroke-width="2"/><circle cx="649.4" cy="372.0" r="5" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>Video B · 5.7 Mbit/s · P-frame vs its B neighbours · v9 (blur mass): reference sharper 34% [29%–39%], tie 35%, neighbour sharper 31%; 774 comparisons, 81 shots</title></circle>
+<text x="820" y="394" text-anchor="end" style="font-size:11px">774 comparisons · 81 shots</text>
+</svg>

@@ -1,0 +1,61 @@
+{
+ "experiment": "R4K-1",
+ "files": {
+  "analyse.py": "65ce55b845d8561271fbc3eb788ad4eb1e056d0b502a7e368225f4e85a9b2fb9",
+  "cells.py": "cfcd06e327ff31f34681dc7e62300e4cedf13f6c256b85526a89ecd42c61b280",
+  "common.py": "5cb3e45f6875e245873dc238ee3ac72df467ef814aa1f0faf8eb274ea0dd0ae4",
+  "data/cells_A_protocol.npz": "7c4f6f4ac8d8f007736aceeb4d2c8dc234a183e0ca9af0eacf634a0b74cfb477",
+  "data/cells_A_revised.npz": "b834b162a36d792266160d0c133fcb2f10ea6215ba8308e52635bdae8fa36a66",
+  "data/cells_B_protocol.npz": "dd77624e8760e1741a2c34cdad516263c1a4138d5f9f2e552074faaf98f678d7",
+  "data/cells_B_revised.npz": "1c88a09b8a2f90f6c2dc9165bc033e92c26fb178def41eba37b85738b97dfd23",
+  "data/checks_A.json": "e7a11d2e9c2bd64a503582b91526b45d3058c6b4811381f8bfec44cb2e660bf0",
+  "data/checks_B.json": "52f833b9e01b01df93b58fee9fa9688e8f8da3a3f81175d5aa14c62dac73fca9",
+  "data/exploratory_phase2_tiefree.json": "225c73ecb75f0d7f3658377bb1ff26e781cd482cf21378c1da3fbaa189852bef",
+  "data/extract_A.log": "384acc513813e45880b4196eb7f9443a1445bd55b6b9f3cc55a5c4d60809e590",
+  "data/frames_A.csv.gz": "63bcfb3581efd3d989bafea1c86249b0101a4530ed292e81383dfe5e229d5bf7",
+  "data/frames_B.csv.gz": "60db50a09caa0d220a3706ec3a429fe25f4a54c92bbb33c30f795dd5a0eab688",
+  "data/results_A_protocol.json": "19d5704e90f2a396c62c73b0e3a6ef10a99ef7fbd51892a7a72aea1308918cb6",
+  "data/results_A_revised.json": "53a177bfa8a1a19a4cde284e450d5a502a3ec82fa8cf945c9f8fae553d428787",
+  "data/results_B_protocol.json": "d670425a0158a267ec428221b2bc6d4241432ecafaf845a999810a0326600a25",
+  "data/results_B_revised.json": "9b3c43676a564ca3b13ec92851df58b850704f03ce833ff61e999552fc521275",
+  "extract.py": "61e6bee409f5e45d97f6fdc3e799bd936f2ca5a76109b1faaf9c756a77b6e500",
+  "figures.py": "cfbb339debb09b652719a9e39104cfc23e0ec8fb089be5fc7d47c8e4deae6c7d",
+  "figures/fig1_same_shot_comparisons.svg": "9c85975951eb2eeb49e70c969f5253f86bec281010fd651d2e057232dbc39f5d",
+  "figures/fig2_distance_from_i_frame.svg": "53e2497fa4c9b35ab10107dbf75c815af4eed708f8d18553b0bd8661903adfce",
+  "figures/fig3_cells_by_texture.svg": "a8cfd38720f6145bc3e3e8d52febedc41a5d47f4756215c9466aab6fc147b5d2",
+  "figures/fig4_i_frame_enrichment.svg": "99642701877689587a75609fa09c9d431cd6b950a14d79b234c7ac1078b74291",
+  "figures/fig5_phase2_windows.svg": "2381caa6cc5f8bafef6a43acfeeaf4c8984c48c2101fd25c13160d506efa3493",
+  "figures/fig6_pixel_statistics.svg": "642f5c1b5127a76f56b3a141f79c3ad48ece72c57431636fbb648b87ff72e56f",
+  "phase2_tiefree.py": "ec1405913eb0c6d7a47be4bc9f742c3f836be9eb2018e87dc3e67b8de29824d6",
+  "PROTOCOL.md": "6a8c10acc76219cf400db3bf95141b7e1d296746ce53540a0c18e5575b5d437e",
+  "PROTOCOL.sha256": "237ae6bee127f0c48f59e0bacc1fb7cc060800a0afac6c774cd1473ed36ee18f",
+  "REPORT.md": "4890b1dcee134761a51c5885892c71d04d4cfab7a1baca37eb3ce6c9e1408b11",
+  "report_tables.py": "998c42cd955a6d3472b04fd412ecc1c640b9f57f649b634ef9d7e4e71539c4e4",
+  "tables.md": "db43f18dd3032b453fada3caf9a46902d8c4a5979cc6a5859229ac7cfd1b5f52"
+ },
+ "publication_edits": {
+  "extract.py": "Frame Blur Studio's valid_cells copied in, so the script needs no unpublished module (the same function, checked on 12 grid shapes); the unused sys import removed",
+  "REPORT.md": "section 2: the v9 readout counts the outer cell ring (the published loader's built-in M does not), Frame Blur Studio is the author's unpublished desktop application; section 9: what reruns without the videos",
+  "phase2_tiefree.py": "added: the exploratory script behind data/exploratory_phase2_tiefree.json, as it was run",
+  "check": "from data/frames_*.csv.gz and data/cells_*.npz, analyse.py, phase2_tiefree.py, figures.py and report_tables.py reproduce every results_*.json, the exploratory file, tables.md and the six figures byte for byte",
+  "line_ends": "the hashes are of the files with LF line ends, as stored in git; a Windows checkout with core.autocrlf has CRLF in text files, so compare after normalising line ends (tests/test_reproduction.py does)"
+ },
+ "video_A": {
+  "sha256": "092752e7a923382c64afa3454dbbee7a476683e98cc2b7b305c31e793942ec3c",
+  "bytes": 845055785,
+  "round3_session": "session_20261027_114336_cfd6a620",
+  "v9_session": "session_20261027_121751_dbfdecb3",
+  "round3_weights_sha256": "9840160f0c337fc1312c2566abf4231be0bd7ee709f65f489fd8f81c65b8d0e6",
+  "v9_weights_sha256": "10d6aa1ebe8cb4bf6bb3cd048aaf75edb07fc1bc23a96d1e8a645a87d0f70ba3",
+  "model_code_sha256": "50fb370d6aafecf51c98636dc0b843dcc8513233e85cba2a10236c26be9666a3"
+ },
+ "video_B": {
+  "sha256": "c2b5df7210c948b8d912f6927175a07a463bbcf1ed80a2202018ce3615ab19a7",
+  "bytes": 710150122,
+  "round3_session": "session_20261027_154207_047882b1",
+  "v9_session": "session_20261027_152605_8dfc4429",
+  "round3_weights_sha256": "9840160f0c337fc1312c2566abf4231be0bd7ee709f65f489fd8f81c65b8d0e6",
+  "v9_weights_sha256": "10d6aa1ebe8cb4bf6bb3cd048aaf75edb07fc1bc23a96d1e8a645a87d0f70ba3",
+  "model_code_sha256": "50fb370d6aafecf51c98636dc0b843dcc8513233e85cba2a10236c26be9666a3"
+ }
+}

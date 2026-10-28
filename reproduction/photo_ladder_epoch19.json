@@ -1,0 +1,338 @@
+{
+ "what": "the photo ladder of Update 1, unchanged, scored with Update 2: the same unseen etalon photo with uniform linear camera motion of known length L, one fixed direction per photo, blur in linear light, then H.264 CRF 23; M = the built-in blur mass (inner cells), called blurred when M > the point",
+ "photos": 300,
+ "photo_sources": "validation and test split of the photo pool (never trained on), no 4K frames",
+ "L_px": [
+  0.0,
+  0.5,
+  1.0,
+  1.5,
+  2.0,
+  2.5,
+  3.0,
+  4.0,
+  5.0,
+  6.0,
+  8.0,
+  10.0,
+  12.0,
+  16.0,
+  20.0,
+  24.0,
+  30.0
+ ],
+ "scoring": "the published weight file and loader, CPU, ConvNeXt trunk under bfloat16 autocast, fingerprint float32",
+ "per_L": [
+  {
+   "L": 0.0,
+   "median_m": 0.0,
+   "quartiles_m": [
+    0.0,
+    0.0
+   ],
+   "blurred_M > 0": 0.0,
+   "blurred_M > 0.05": 0.0,
+   "blurred_M > 0.25": 0.0,
+   "median_strongest_inner_logit": -12.5,
+   "median_mean_inner_logit": -23.563875198364258,
+   "any_cell_positive_ring_included": 0.0,
+   "median_m_all_cells": 0.0
+  },
+  {
+   "L": 0.5,
+   "median_m": 0.0,
+   "quartiles_m": [
+    0.0,
+    0.0
+   ],
+   "blurred_M > 0": 0.0,
+   "blurred_M > 0.05": 0.0,
+   "blurred_M > 0.25": 0.0,
+   "median_strongest_inner_logit": -12.4375,
+   "median_mean_inner_logit": -23.537029266357422,
+   "any_cell_positive_ring_included": 0.0033333333333333335,
+   "median_m_all_cells": 0.0
+  },
+  {
+   "L": 1.0,
+   "median_m": 0.0,
+   "quartiles_m": [
+    0.0,
+    0.0
+   ],
+   "blurred_M > 0": 0.0,
+   "blurred_M > 0.05": 0.0,
+   "blurred_M > 0.25": 0.0,
+   "median_strongest_inner_logit": -12.375,
+   "median_mean_inner_logit": -23.4439640045166,
+   "any_cell_positive_ring_included": 0.0033333333333333335,
+   "median_m_all_cells": 0.0
+  },
+  {
+   "L": 1.5,
+   "median_m": 0.0,
+   "quartiles_m": [
+    0.0,
+    0.0
+   ],
+   "blurred_M > 0": 0.0,
+   "blurred_M > 0.05": 0.0,
+   "blurred_M > 0.25": 0.0,
+   "median_strongest_inner_logit": -12.3125,
+   "median_mean_inner_logit": -23.3493595123291,
+   "any_cell_positive_ring_included": 0.0033333333333333335,
+   "median_m_all_cells": 0.0
+  },
+  {
+   "L": 2.0,
+   "median_m": 0.0,
+   "quartiles_m": [
+    0.0,
+    0.0
+   ],
+   "blurred_M > 0": 0.0,
+   "blurred_M > 0.05": 0.0,
+   "blurred_M > 0.25": 0.0,
+   "median_strongest_inner_logit": -12.25,
+   "median_mean_inner_logit": -23.18790054321289,
+   "any_cell_positive_ring_included": 0.0033333333333333335,
+   "median_m_all_cells": 0.0
+  },
+  {
+   "L": 2.5,
+   "median_m": 0.0,
+   "quartiles_m": [
+    0.0,
+    0.0
+   ],
+   "blurred_M > 0": 0.0,
+   "blurred_M > 0.05": 0.0,
+   "blurred_M > 0.25": 0.0,
+   "median_strongest_inner_logit": -12.125,
+   "median_mean_inner_logit": -22.988287925720215,
+   "any_cell_positive_ring_included": 0.0033333333333333335,
+   "median_m_all_cells": 0.0
+  },
+  {
+   "L": 3.0,
+   "median_m": 0.0,
+   "quartiles_m": [
+    0.0,
+    0.0
+   ],
+   "blurred_M > 0": 0.0033333333333333335,
+   "blurred_M > 0.05": 0.0,
+   "blurred_M > 0.25": 0.0,
+   "median_strongest_inner_logit": -11.9375,
+   "median_mean_inner_logit": -22.741881370544434,
+   "any_cell_positive_ring_included": 0.0033333333333333335,
+   "median_m_all_cells": 0.0
+  },
+  {
+   "L": 4.0,
+   "median_m": 0.0,
+   "quartiles_m": [
+    0.0,
+    0.0
+   ],
+   "blurred_M > 0": 0.0033333333333333335,
+   "blurred_M > 0.05": 0.0,
+   "blurred_M > 0.25": 0.0,
+   "median_strongest_inner_logit": -11.5,
+   "median_mean_inner_logit": -21.82682228088379,
+   "any_cell_positive_ring_included": 0.0033333333333333335,
+   "median_m_all_cells": 0.0
+  },
+  {
+   "L": 5.0,
+   "median_m": 0.0,
+   "quartiles_m": [
+    0.0,
+    0.0
+   ],
+   "blurred_M > 0": 0.013333333333333334,
+   "blurred_M > 0.05": 0.006666666666666667,
+   "blurred_M > 0.25": 0.0033333333333333335,
+   "median_strongest_inner_logit": -10.75,
+   "median_mean_inner_logit": -19.579524993896484,
+   "any_cell_positive_ring_included": 0.013333333333333334,
+   "median_m_all_cells": 0.0
+  },
+  {
+   "L": 6.0,
+   "median_m": 0.0,
+   "quartiles_m": [
+    0.0,
+    0.0
+   ],
+   "blurred_M > 0": 0.13333333333333333,
+   "blurred_M > 0.05": 0.08,
+   "blurred_M > 0.25": 0.07,
+   "median_strongest_inner_logit": -7.671875,
+   "median_mean_inner_logit": -14.169485092163086,
+   "any_cell_positive_ring_included": 0.17333333333333334,
+   "median_m_all_cells": 0.0
+  },
+  {
+   "L": 8.0,
+   "median_m": 16.46981906890869,
+   "quartiles_m": [
+    14.352583885192871,
+    17.940662384033203
+   ],
+   "blurred_M > 0": 0.9966666666666667,
+   "blurred_M > 0.05": 0.9966666666666667,
+   "blurred_M > 0.25": 0.9966666666666667,
+   "median_strongest_inner_logit": 22.0625,
+   "median_mean_inner_logit": 16.46981906890869,
+   "any_cell_positive_ring_included": 0.9966666666666667,
+   "median_m_all_cells": 16.549321174621582
+  },
+  {
+   "L": 10.0,
+   "median_m": 19.904455184936523,
+   "quartiles_m": [
+    18.6360445022583,
+    21.12360143661499
+   ],
+   "blurred_M > 0": 1.0,
+   "blurred_M > 0.05": 1.0,
+   "blurred_M > 0.25": 1.0,
+   "median_strongest_inner_logit": 26.375,
+   "median_mean_inner_logit": 19.904455184936523,
+   "any_cell_positive_ring_included": 1.0,
+   "median_m_all_cells": 19.837364196777344
+  },
+  {
+   "L": 12.0,
+   "median_m": 20.85789203643799,
+   "quartiles_m": [
+    19.649202823638916,
+    21.92891502380371
+   ],
+   "blurred_M > 0": 1.0,
+   "blurred_M > 0.05": 1.0,
+   "blurred_M > 0.25": 1.0,
+   "median_strongest_inner_logit": 27.5,
+   "median_mean_inner_logit": 20.85789203643799,
+   "any_cell_positive_ring_included": 1.0,
+   "median_m_all_cells": 20.825260162353516
+  },
+  {
+   "L": 16.0,
+   "median_m": 21.361968994140625,
+   "quartiles_m": [
+    20.252500534057617,
+    22.36959743499756
+   ],
+   "blurred_M > 0": 1.0,
+   "blurred_M > 0.05": 1.0,
+   "blurred_M > 0.25": 1.0,
+   "median_strongest_inner_logit": 28.125,
+   "median_mean_inner_logit": 21.361968994140625,
+   "any_cell_positive_ring_included": 1.0,
+   "median_m_all_cells": 21.312689781188965
+  },
+  {
+   "L": 20.0,
+   "median_m": 21.376121520996094,
+   "quartiles_m": [
+    20.187767028808594,
+    22.436087131500244
+   ],
+   "blurred_M > 0": 1.0,
+   "blurred_M > 0.05": 1.0,
+   "blurred_M > 0.25": 1.0,
+   "median_strongest_inner_logit": 28.1875,
+   "median_mean_inner_logit": 21.376121520996094,
+   "any_cell_positive_ring_included": 1.0,
+   "median_m_all_cells": 21.336496353149414
+  },
+  {
+   "L": 24.0,
+   "median_m": 21.21436882019043,
+   "quartiles_m": [
+    20.02957820892334,
+    22.24705171585083
+   ],
+   "blurred_M > 0": 1.0,
+   "blurred_M > 0.05": 1.0,
+   "blurred_M > 0.25": 1.0,
+   "median_strongest_inner_logit": 28.0,
+   "median_mean_inner_logit": 21.21436882019043,
+   "any_cell_positive_ring_included": 1.0,
+   "median_m_all_cells": 21.166784286499023
+  },
+  {
+   "L": 30.0,
+   "median_m": 20.905922889709473,
+   "quartiles_m": [
+    19.672228813171387,
+    21.949671268463135
+   ],
+   "blurred_M > 0": 1.0,
+   "blurred_M > 0.05": 1.0,
+   "blurred_M > 0.25": 1.0,
+   "median_strongest_inner_logit": 27.75,
+   "median_mean_inner_logit": 20.905922889709473,
+   "any_cell_positive_ring_included": 1.0,
+   "median_m_all_cells": 20.873315811157227
+  }
+ ],
+ "flip_L_50pct": {
+  "M > 0": 6.8494208494208495,
+  "M > 0.05": 6.916363636363636,
+  "M > 0.25": 6.928057553956834
+ },
+ "order": {
+  "M": {
+   "0_3_px": {
+    "ordered": 0.0009523809523809524,
+    "tied": 0.9990476190476191,
+    "reversed": 0.0
+   },
+   "3_16_px": {
+    "ordered": 0.7970238095238096,
+    "tied": 0.19940476190476192,
+    "reversed": 0.0035714285714285713
+   }
+  },
+  "mean_inner_logit": {
+   "0_3_px": {
+    "ordered": 0.823968253968254,
+    "tied": 0.0,
+    "reversed": 0.17603174603174604
+   },
+   "3_16_px": {
+    "ordered": 0.9963095238095238,
+    "tied": 0.0,
+    "reversed": 0.0036904761904761906
+   },
+   "strictly_increasing_0_1_2_3": 0.54
+  },
+  "strongest_inner_logit": {
+   "0_3_px": {
+    "ordered": 0.6888888888888889,
+    "tied": 0.05492063492063492,
+    "reversed": 0.2561904761904762
+   },
+   "3_16_px": {
+    "ordered": 0.983452380952381,
+    "tied": 0.004285714285714286,
+    "reversed": 0.012261904761904762
+   },
+   "strictly_increasing_0_1_2_3": 0.30333333333333334
+  },
+  "pair_definition": "all pairs of lengths L_i < L_j of the same photo in the range; ordered = the longer blur scores higher, tied = equal, reversed = lower"
+ },
+ "update1_for_comparison": {
+  "file": "photo_ladder_update1_epoch29.json",
+  "flip_L_50pct": {
+   "r90": 9.19634703196347,
+   "r95": 9.127753303964758,
+   "r98": 9.072961373390559
+  },
+  "pair_order_accuracy_0_3_px": 0.6174603174603175,
+  "pair_order_accuracy_3_16_px": 0.9921428571428571
+ }
+}

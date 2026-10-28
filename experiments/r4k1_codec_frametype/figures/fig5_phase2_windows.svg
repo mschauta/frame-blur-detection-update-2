@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="360" viewBox="0 0 860 360" role="img" aria-label="Sharpest frame per time window: how often is it an I-frame?">
+<style>
+svg { --surface:#fcfcfb; --ink:#0b0b0b; --ink2:#52514e; --grid:#e4e3df; --series-1:#2a78d6; --series-2:#eb6834; }
+@media (prefers-color-scheme: dark) {
+  svg { --surface:#1a1a19; --ink:#f0efec; --ink2:#c3c2b7; --grid:#3a3936; --series-1:#3987e5; --series-2:#d95926; }
+}
+text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; fill: var(--ink2); font-size: 12px; }
+.title { fill: var(--ink); font-size: 15px; font-weight: 600; }
+.panel { fill: var(--ink); font-size: 13px; font-weight: 600; }
+.axis { stroke: var(--ink2); stroke-width: 1; }
+.grid { stroke: var(--grid); stroke-width: 1; }
+.ref { stroke: var(--ink2); stroke-width: 1; stroke-dasharray: 4 3; }
+</style>
+<rect width="860" height="360" fill="var(--surface)"/>
+<text class="title" x="16" y="26">Sharpest frame per time window: how often is it an I-frame?</text>
+<text x="16" y="46">Enrichment of I-frames among the picks over the I-frame share of the windows; 95% intervals (window bootstrap).</text>
+<circle cx="21" cy="66" r="5" fill="var(--series-1)"/><text x="31" y="70" style="fill:var(--ink)">round3 (log-sum-exp)</text>
+<circle cx="183" cy="66" r="5" fill="var(--series-2)"/><text x="193" y="70" style="fill:var(--ink)">v9 (blur mass)</text>
+<text class="panel" x="130" y="100">Video A · 2.6 Mbit/s</text>
+<text x="142.8" y="316" text-anchor="middle">1×</text>
+<text x="182.5" y="316" text-anchor="middle">2×</text>
+<text x="235.0" y="316" text-anchor="middle">5×</text>
+<text x="274.8" y="316" text-anchor="middle">10×</text>
+<text x="314.5" y="316" text-anchor="middle">20×</text>
+<text x="367.0" y="316" text-anchor="middle">50×</text>
+<text x="406.8" y="316" text-anchor="middle">100×</text>
+<line class="axis" x1="130" x2="430" y1="300" y2="300"/>
+<text x="280.0" y="334" text-anchor="middle">I-frame enrichment of the picks (log scale)</text>
+<line class="ref" x1="142.8" x2="142.8" y1="110" y2="300"/>
+<text x="16" y="149" style="fill:var(--ink)">1s windows</text>
+<line x1="311.0" x2="314.8" y1="135.0" y2="135.0" stroke="var(--series-1)" stroke-width="2"/><circle cx="312.9" cy="135.0" r="5" fill="var(--series-1)" stroke="var(--surface)" stroke-width="2"><title>Video A · 2.6 Mbit/s · 1s · round3 (log-sum-exp): picks are I-frames 23% vs 1% expected → 19.45× (2599 windows)</title></circle>
+<line x1="297.4" x2="303.1" y1="155.0" y2="155.0" stroke="var(--series-2)" stroke-width="2"/><circle cx="300.2" cy="155.0" r="5" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>Video A · 2.6 Mbit/s · 1s · v9 (blur mass): picks are I-frames 19% vs 1% expected → 15.58× (2599 windows)</title></circle>
+<text x="16" y="209" style="fill:var(--ink)">5s windows</text>
+<line x1="377.3" x2="384.4" y1="195.0" y2="195.0" stroke="var(--series-1)" stroke-width="2"/><circle cx="380.9" cy="195.0" r="5" fill="var(--series-1)" stroke="var(--surface)" stroke-width="2"><title>Video A · 2.6 Mbit/s · 5s · round3 (log-sum-exp): picks are I-frames 77% vs 1% expected → 63.64× (522 windows)</title></circle>
+<line x1="355.8" x2="365.6" y1="215.0" y2="215.0" stroke="var(--series-2)" stroke-width="2"/><circle cx="360.6" cy="215.0" r="5" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>Video A · 2.6 Mbit/s · 5s · v9 (blur mass): picks are I-frames 54% vs 1% expected → 44.72× (522 windows)</title></circle>
+<text x="16" y="269" style="fill:var(--ink)">20s windows</text>
+<line x1="385.4" x2="396.3" y1="255.0" y2="255.0" stroke="var(--series-1)" stroke-width="2"/><circle cx="390.9" cy="255.0" r="5" fill="var(--series-1)" stroke="var(--surface)" stroke-width="2"><title>Video A · 2.6 Mbit/s · 20s · round3 (log-sum-exp): picks are I-frames 92% vs 1% expected → 75.78× (131 windows)</title></circle>
+<line x1="345.4" x2="364.3" y1="275.0" y2="275.0" stroke="var(--series-2)" stroke-width="2"/><circle cx="355.2" cy="275.0" r="5" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>Video A · 2.6 Mbit/s · 20s · v9 (blur mass): picks are I-frames 49% vs 1% expected → 40.70× (131 windows)</title></circle>
+<text class="panel" x="500" y="100">Video B · 5.7 Mbit/s</text>
+<text x="512.8" y="316" text-anchor="middle">1×</text>
+<text x="552.5" y="316" text-anchor="middle">2×</text>
+<text x="605.0" y="316" text-anchor="middle">5×</text>
+<text x="644.8" y="316" text-anchor="middle">10×</text>
+<text x="684.5" y="316" text-anchor="middle">20×</text>
+<text x="737.0" y="316" text-anchor="middle">50×</text>
+<text x="776.8" y="316" text-anchor="middle">100×</text>
+<line class="axis" x1="500" x2="800" y1="300" y2="300"/>
+<text x="650.0" y="334" text-anchor="middle">I-frame enrichment of the picks (log scale)</text>
+<line class="ref" x1="512.8" x2="512.8" y1="110" y2="300"/>
+<line x1="634.7" x2="652.1" y1="135.0" y2="135.0" stroke="var(--series-1)" stroke-width="2"/><circle cx="644.0" cy="135.0" r="5" fill="var(--series-1)" stroke="var(--surface)" stroke-width="2"><title>Video B · 5.7 Mbit/s · 1s · round3 (log-sum-exp): picks are I-frames 11% vs 1% expected → 9.87× (995 windows)</title></circle>
+<line x1="557.0" x2="587.9" y1="155.0" y2="155.0" stroke="var(--series-2)" stroke-width="2"/><circle cx="573.2" cy="155.0" r="5" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>Video B · 5.7 Mbit/s · 1s · v9 (blur mass): picks are I-frames 3% vs 1% expected → 2.87× (995 windows)</title></circle>
+<line x1="686.4" x2="712.1" y1="195.0" y2="195.0" stroke="var(--series-1)" stroke-width="2"/><circle cx="700.1" cy="195.0" r="5" fill="var(--series-1)" stroke="var(--surface)" stroke-width="2"><title>Video B · 5.7 Mbit/s · 5s · round3 (log-sum-exp): picks are I-frames 29% vs 1% expected → 26.24× (199 windows)</title></circle>
+<line x1="524.6" x2="580.2" y1="215.0" y2="215.0" stroke="var(--series-2)" stroke-width="2"/><circle cx="554.1" cy="215.0" r="5" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>Video B · 5.7 Mbit/s · 5s · v9 (blur mass): picks are I-frames 2% vs 1% expected → 2.06× (199 windows)</title></circle>
+<line x1="688.2" x2="730.8" y1="255.0" y2="255.0" stroke="var(--series-1)" stroke-width="2"/><circle cx="712.2" cy="255.0" r="5" fill="var(--series-1)" stroke="var(--surface)" stroke-width="2"><title>Video B · 5.7 Mbit/s · 20s · round3 (log-sum-exp): picks are I-frames 36% vs 1% expected → 32.41× (50 windows)</title></circle>
+<line x1="517.7" x2="565.4" y1="275.0" y2="275.0" stroke="var(--series-2)" stroke-width="2"/><circle cx="542.2" cy="275.0" r="5" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"><title>Video B · 5.7 Mbit/s · 20s · v9 (blur mass): picks are I-frames 2% vs 1% expected → 1.67× (50 windows)</title></circle>
+</svg>
