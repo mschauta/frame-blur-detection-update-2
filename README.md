@@ -19,7 +19,9 @@ This repository holds:
 - the evidence behind the reported numbers, in [reproduction/](reproduction/);
 - a separate experiment on two videos outside the training data, in
   [experiments/r4k1_codec_frametype/](experiments/r4k1_codec_frametype/). It shows that the coded frame type (I, P or
-  B) changes the scores of both Update 1 and Update 2.
+  B) changes the scores of both Update 1 and Update 2;
+- its controlled follow-up on sharp photos, in [experiments/r4k2_gop_photo/](experiments/r4k2_gop_photo/). The same
+  source frames are coded with and without inter frames, so the frame type is set by the test, not by an encoder.
 
 The task, the principles, the photo construction and the fingerprint are described in the original repository's
 [README](https://github.com/mschauta/frame-blur-detection#readme) and
@@ -278,6 +280,37 @@ are pinned in [requirements-experiments.txt](requirements-experiments.txt).
 The likely origin is the training: every training photo passed through x264 as a single intra-coded frame, so neither
 model saw a sharp inter-coded frame with a known label.
 
+### Sharp photos under controlled coding: the frame-type effect confirmed
+
+[experiments/r4k2_gop_photo/](experiments/r4k2_gop_photo/) repeats the question with an exact signal. The protocol
+was fixed before any result.
+
+- **Material:** 100 sharp (0 px) etalon photos, never trained on. Each became a static and a panning 48-frame clip
+  (whole-pixel steps, so every frame stays 0 px).
+- **Coding:** I-frames only, `IP` and `IPB` (an I-frame every 15 frames), at CRF 23 / 28 / 33 and 2 Mbit/s, through
+  the training's x264 chain.
+- **Scoring:** Update 1 (Base and Small) and Update 2 scored all 115,200 frames.
+
+Every frame is sharp, so every blur decision is a false alarm. The
+[report](experiments/r4k2_gop_photo/REPORT.md) has the four measures of the protocol, the deviations and the full
+tables. From the per-frame table the code reproduces the result file byte for byte.
+
+- **Coded with I-frames only, a sharp photo is practically never called blurred** (0.0–0.2% of the frames at the
+  decision thresholds), by every model and at every rate.
+- **Coded as a P- or B-frame, the same source frame scores blurrier:**
+  - Update 1 scores it 7–14 logits higher at CRF 23 and 2 Mbit/s and in the panning clips, with every paired
+    interval above 0;
+  - Update 2 calls 1–5 points more of these frames blurred at r95.
+- **At equal quality (PSNR) the effect remains in the panning clips:** about +10 logits in every 1 dB bin from 30 to
+  40 dB.
+- **It is not the frame type alone.** A GOP coding also makes its I-frames much cleaner (about 40 dB against 37 dB at
+  CRF 23), and Update 1 scores those clean I-frames about 6–8 logits blurrier too.
+- **R4K-1 is reproduced under control.** In the panning clips at CRF 28 and 33 the in-clip I-frame scores sharper than
+  both of its neighbours in 98–100% of the cases, against about 33% for the same positions coded I-frame-only.
+
+By the rule fixed in advance the effect is confirmed for all three models. The test used one encoder, one size and one
+photo album.
+
 ## Limitations
 
 - **The teacher is Update 1.** Update 2 learned Update 1's maps, errors included, and its agreement with them is not
@@ -294,9 +327,11 @@ model saw a sharp inter-coded frame with a known label.
   neighbours. On low-bitrate encodes, comparisons and selections across frame types are biased.
   - The experiment is observational: the encoders chose the frame types. An I-frame differs from its neighbours in
     frame type, quantiser and bits at once.
-  - On video B the fixed GOP places the I-frames independently of the content, but nothing here separates the frame
-    type from its quantiser. A controlled re-encode would: the same source frames under different GOP structures and
-    quantisers.
+  - On video B the fixed GOP places the I-frames independently of the content, but nothing there separates the frame
+    type from its quantiser.
+  - The controlled re-encode of sharp photos (R4K-2, above) confirms that P/B coding alone makes a sharp frame score
+    blurrier. It also shows that a very clean GOP coding shifts the I-frames' scores in the same direction. It used one
+    encoder (x264), one size and static or whole-pixel panning clips.
 - **Area weighting.** A small, strongly blurred region adds little mass. This tolerates background defocus better
   than Update 1, but it also tolerates a small blurred subject, such as a fast-moving hand.
 - **The outer cell ring was not taught.** The built-in M leaves it out; a readout that counts it adds untaught

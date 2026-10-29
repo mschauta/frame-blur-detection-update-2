@@ -71,6 +71,8 @@ videos. Its maps of the six held-out films are not.
   them (4–9 px on photos) is taught by the frame targets, not by the photos.
 - **Every training photo is an I-frame**, a single intra-coded frame. Video frames are mostly P- and B-frames. The
   two-video experiment ([experiments/r4k1_codec_frametype/](experiments/r4k1_codec_frametype/)) shows what this does.
+  Its controlled follow-up on sharp photos ([experiments/r4k2_gop_photo/](experiments/r4k2_gop_photo/)) confirms
+  it.
 
 ## 7. Model input
 
@@ -129,6 +131,9 @@ untaught evidence. `classify.py` uses the built-in readout.
   [reproduction/photo_ladder_epoch19.json](reproduction/photo_ladder_epoch19.json).
 - **Two videos outside the training data, every frame.** This is a separate experiment with its own fixed protocol:
   [experiments/r4k1_codec_frametype/](experiments/r4k1_codec_frametype/).
+- **Sharp photos under three GOP structures and four rates**, every frame scored by Update 1 (Base and Small) and
+  Update 2. This is also a separate experiment with its own fixed protocol:
+  [experiments/r4k2_gop_photo/](experiments/r4k2_gop_photo/).
 - **Not done yet:** scoring the whole corpus, the two-release agreement and Update 1's scene-consistency check. They
   need a full pass over the corpus on the GPU.
 

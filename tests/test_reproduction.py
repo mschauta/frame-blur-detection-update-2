@@ -7,7 +7,8 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 EVIDENCE = sorted((ROOT / "reproduction").glob("*.json"))
-EXPERIMENT = ROOT / "experiments" / "r4k1_codec_frametype"
+EXPERIMENTS = [ROOT / "experiments" / "r4k1_codec_frametype", ROOT / "experiments" / "r4k2_gop_photo"]
+R4K2 = ROOT / "experiments" / "r4k2_gop_photo"
 
 
 def strict(path: Path):
@@ -123,19 +124,49 @@ def test_method_quotes_the_counts():
         assert number in method, number
 
 
-def test_experiment_manifest_matches_the_files():
-    manifest = strict(EXPERIMENT / "MANIFEST.json")
-    on_disk = {p.relative_to(EXPERIMENT).as_posix() for p in EXPERIMENT.rglob("*")
+@pytest.mark.parametrize("experiment", EXPERIMENTS, ids=lambda p: p.name)
+def test_experiment_manifest_matches_the_files(experiment):
+    manifest = strict(experiment / "MANIFEST.json")
+    on_disk = {p.relative_to(experiment).as_posix() for p in experiment.rglob("*")
                if p.is_file() and p.name != "MANIFEST.json" and "__pycache__" not in p.parts}
     assert set(manifest["files"]) == on_disk
     for name, digest in manifest["files"].items():
-        data = (EXPERIMENT / name).read_bytes()
+        data = (experiment / name).read_bytes()
         if name.endswith((".md", ".py", ".json", ".log", ".svg", ".sha256")):
             # git may check text files out with CRLF line ends (core.autocrlf); the hashes are of the LF files
             data = data.replace(b"\r\n", b"\n")
         assert hashlib.sha256(data).hexdigest() == digest, name
 
 
-def test_experiment_protocol_is_the_registered_one():
-    digest = hashlib.sha256((EXPERIMENT / "PROTOCOL.md").read_bytes().replace(b"\r\n", b"\n")).hexdigest()
-    assert digest in (EXPERIMENT / "PROTOCOL.sha256").read_text(encoding="utf-8")
+@pytest.mark.parametrize("experiment", EXPERIMENTS, ids=lambda p: p.name)
+def test_experiment_protocol_is_the_registered_one(experiment):
+    # R4K-1 registered its protocol in English; R4K-2 in Hungarian (PROTOCOL_hu.md, which PROTOCOL.md translates)
+    registered = experiment / ("PROTOCOL_hu.md" if (experiment / "PROTOCOL_hu.md").exists() else "PROTOCOL.md")
+    digest = hashlib.sha256(registered.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+    assert digest in (experiment / "PROTOCOL.sha256").read_text(encoding="utf-8")
+
+
+def test_r4k2_results_are_strict_json():
+    strict(R4K2 / "data" / "results.json")
+    strict(R4K2 / "data" / "thresholds.json")
+
+
+def test_readme_and_report_quote_r4k2():
+    readme, report = flat(ROOT / "README.md"), flat(R4K2 / "REPORT.md")
+    r = strict(R4K2 / "data" / "results.json")
+    assert r["frames"] == 115_200 and r["photos"] == 100 and "115,200 frames" in readme
+    total = r["false_alarms_total"]
+    for m in ("base", "small", "v9"):
+        n = total[f"{m}/r95"]["blurred"]
+        assert f"{n:,} ({100 * n / total[f'{m}/r95']['of']:.1f}%)" in report, m
+    qm = r["quality_matched"]["base/pan"]["weighted_difference_pb_minus_I_only"]
+    assert f"+{qm['value']:.1f} [+{qm['ci95'][0]:.1f}, +{qm['ci95'][1]:.1f}]" in report
+    p = r["paired_vs_I_only"]["base/pan/crf33/IP/P"]["blurred_share_difference_r95"]
+    assert f"+{100 * p['value']:.1f} [+{100 * p['ci95'][0]:.1f}, +{100 * p['ci95'][1]:.1f}]" in report
+    rep = r["r4k1_repeat"]
+    shares = [rep[f"{m}/pan/{ra}/IPB"]["i_frame_sharpest"]["value"] for m in ("base", "small") for ra in ("crf28", "crf33")]
+    assert f"{100 * min(shares):.0f}–{100 * max(shares):.0f}%" in readme
+    keys = [k.split("/") for k in r["paired_vs_I_only"]]
+    diffs = [r["paired_vs_I_only"]["/".join(k)]["score_difference"]["value"] for k in keys
+             if k[0] in ("base", "small") and k[4] in ("P", "B") and (k[2] in ("crf23", "2mbps") or k[1] == "pan")]
+    assert f"{min(diffs):.0f}–{max(diffs):.0f} logits higher" in readme

@@ -1,6 +1,8 @@
-# The two-video experiment (experiments/r4k1_codec_frametype/), with the versions it ran on (Python 3.13.15).
-# analyse.py needs numpy and scipy, phase2_tiefree.py numpy, figures.py and report_tables.py only the standard
-# library; extract.py and cells.py need all three, and ffmpeg / ffprobe 7.1 on the PATH.
+# The experiments (experiments/), with the versions they ran on (Python 3.13.15).
+# r4k1_codec_frametype: analyse.py needs numpy and scipy, phase2_tiefree.py numpy, figures.py and report_tables.py only
+# the standard library; extract.py and cells.py need all three, and ffmpeg / ffprobe 7.1 on the PATH.
+# r4k2_gop_photo: analyse.py needs numpy, report_tables.py only the standard library; run.py also needs torch (with
+# requirements.txt), Update 1's loader and weights, and ffmpeg / ffprobe 7.1 on the PATH.
 numpy==2.5.2
 scipy==1.18.1
 opencv-python-headless==4.14.0.94

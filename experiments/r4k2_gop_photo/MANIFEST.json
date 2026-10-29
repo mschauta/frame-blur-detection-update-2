@@ -1,0 +1,34 @@
+{
+ "experiment": "R4K-2",
+ "files": {
+  "analyse.py": "1bb87dfab1edfced62379846c979a9ab96c78a3c4220c9391c3668ecdfdfa229",
+  "data/frames.csv.gz": "83c6003cc46576837a3438a73bd699c46e3efe133363f27ec4d92e63cde359af",
+  "data/results.json": "a695ae94b32208100763824978dba316ed88441d033c1bbfe48386ad125a7e7d",
+  "data/run.log": "eff1d308e8ff3b420781f45ec9a60ff1968be75b5b833ee7277a7f2f13a93dcb",
+  "data/thresholds.json": "f0dabd93c49d7088164a93704f564da08b6be7f8862b325e4ea9a432a127f341",
+  "PROTOCOL.md": "ee4988fc1e52c708c0e47fe6b0525a9ba9922c3c01bb20e04c84e6860676de91",
+  "PROTOCOL.sha256": "a6c17c9fa7efc04cb7eaade6156144bec220cdb2776847d4f4b7ce5d57883656",
+  "PROTOCOL_hu.md": "801139d74ee4878f6fda2c1444bb3d252e46964cde6d0c1c2de791618a6f9568",
+  "REPORT.md": "da114126f5537ec905d484fc26330ac2d596f0cda396389e7fb2f45682ada3b0",
+  "report_tables.py": "b7d4715f03332bd6d5b36fb5d322c7173cf73b31e95da3213497a4f27da33475",
+  "run.py": "21f8b02d903ddba8e496c27d2b0114a1ea24b00f20ece941e5abe5e159821eb3",
+  "tables.md": "4fff49a0667953bb1e2b3d73f1b93a60c260bf57533926d410f89596ef44d59d"
+ },
+ "publication_edits": {
+  "run.py": "blurtrainer/experiments/r4k2_gop_foto/run.py as run, with: the docstring extended for publication; the training's x264 settings (blurtrainer.synth.ENCODER) copied in instead of imported; the etalon albums' bin names replaced by ETALON_ALBUMS = () (withheld), and an album named in a docstring replaced by 'one album'",
+  "analyse.py": "as run, changed only to read data/frames.csv.gz instead of data/frames.csv, the round3 thresholds from data/thresholds.json instead of the weight files (so torch is not needed), v9's r95 point from this repository's reproduction/heldout_films.json (the same file as used), and LF line ends for data/results.json",
+  "report_tables.py": "added for publication: the full tables from data/results.json, and the descriptive spread of the false alarms over the photos from data/frames.csv.gz",
+  "data/frames.csv.gz": "data/frames.csv as written, the photo ids replaced by p000 ... p099 in the sorted order of the original ids, so analyse.py assigns the same photo index and draws the same bootstrap; data/photos.json (the original ids) is not published",
+  "data/thresholds.json": "the two round3 weight files' identity and stored thresholds, from their metadata",
+  "data/run.log": "as written, with LF line ends",
+  "PROTOCOL_hu.md": "the registered text (docs/kiserlet_r4k2_gop_foto.md up to and including the '## Napló' heading) with the two album names replaced by '[két album, a nevük visszatartva]' ('two albums, names withheld'); nothing else changed. The registered hash in PROTOCOL.sha256 is of the unredacted text; PROTOCOL.md is the English translation, REPORT.md translates the log"
+ },
+ "check": "from data/frames.csv.gz and data/thresholds.json, analyse.py reproduces data/results.json byte for byte (checked on 2026-10-29 against the file the analysis wrote as run, after normalising line ends; Python 3.13.15, numpy 2.5.2), and report_tables.py writes tables.md",
+ "line_ends": "the hashes are of the files with LF line ends, as stored in git; a Windows checkout with core.autocrlf has CRLF in text files, so compare after normalising line ends (tests/test_reproduction.py does)",
+ "weights_sha256": {
+  "round3_base_p99_ep029.pt": "9840160f0c337fc1312c2566abf4231be0bd7ee709f65f489fd8f81c65b8d0e6",
+  "round3_small_p99_ep029.pt": "b715a163f9c6927464d97b7002967c8361c6a0de2b87e3103dc72a7ba733d48b",
+  "v9_base_selfmap_v2_ep019.pt": "10d6aa1ebe8cb4bf6bb3cd048aaf75edb07fc1bc23a96d1e8a645a87d0f70ba3"
+ },
+ "run_environment": "torch 2.14.0+cu130 on an RTX 5090; ffmpeg / ffprobe 7.1.1; Update 1 loader at 62734f4"
+}
