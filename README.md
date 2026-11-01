@@ -1,5 +1,10 @@
 # Frame Blur Detection — Update 2
 
+![Frame Blur Detection — Update 2 infographic](figures/frame_blur_detection_update_2_poster_en.png)
+
+*The portrait in the infographic illustrates a frame of Young Royals, a TV series that is not training material. The
+training photos and frames are not published.*
+
 The third published model of [Frame Blur Detection](https://github.com/mschauta/frame-blur-detection), after
 [Update 1](https://github.com/mschauta/frame-blur-detection-update-1). It is a blur detector for video frames with the
 same input as before: the signed edge fingerprint of the
