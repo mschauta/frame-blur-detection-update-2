@@ -4,7 +4,8 @@ The third published model of [Frame Blur Detection](https://github.com/mschauta/
 [Update 1](https://github.com/mschauta/frame-blur-detection-update-1). It is a blur detector for video frames with the
 same input as before: the signed edge fingerprint of the
 [RGB Mesh Resampling](https://github.com/mschauta/rgb-mesh-resampling) `m09` reconstruction. It also keeps the same
-ConvNeXt-Base trunk and the same synthetic photo pool. What changed is what it learns from and what it gives:
+ConvNeXt-Base trunk and the same synthetic photo pool. The trunk is the original ConvNeXt (v1; Liu et al., 2022, as implemented in torchvision), not ConvNeXt V2.
+What changed is what it learns from and what it gives:
 
 - **It learns from cell maps, not from labels.** Every frame of the 167 training videos (4,850,458 frames, seen once)
   carries Update 1's cell map as a soft target per 16 px cell. A freshly initialised network learns these maps:
@@ -92,7 +93,8 @@ The weight file is attached to the [release](../../releases) (230 MB; not stored
 | `v9_base_selfmap_v2_ep019.pt` | `10d6aa1ebe8cb4bf6bb3cd048aaf75edb07fc1bc23a96d1e8a645a87d0f70ba3` | edge fingerprint | 19 (last of 20), EMA | blur mass M |
 
 `v9_base_selfmap_v2` is the training run's name: design v9, ConvNeXt-Base, trained on self-made cell maps, second
-run.
+run. Its `v2` counts the runs and is not ConvNeXt V2. In the same way, `IMAGENET1K_V1` is the version of torchvision's
+ImageNet weights, not of the architecture.
 
 **The file.** It holds the state dict and its metadata. Besides the input type, the loader reads four metadata keys:
 
